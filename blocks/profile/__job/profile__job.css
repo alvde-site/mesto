@@ -7,3 +7,12 @@
   color: white;
   margin: 0;
 }
+
+@media (max-width: 935px) {
+  .profile__job {
+    text-align: center;
+    margin: 0 0 36px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

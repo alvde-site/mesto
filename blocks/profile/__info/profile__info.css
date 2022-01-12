@@ -1,3 +1,4 @@
 .profile__info {
-  max-width: 336px;
+  min-width: 336px;
+  text-align: center;
 }
