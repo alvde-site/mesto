@@ -20,6 +20,11 @@
 @import url(../blocks/profile/__job/profile__job.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__img/element__img.css);
+@import url(../blocks/element/__description/element__description.css);
+@import url(../blocks/element/__description-text/element__description-text.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
 
 /*footer начало */
 @import url(../blocks/footer/footer.css);

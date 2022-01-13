@@ -1,0 +1,17 @@
+.element__like-button {
+  width: 22px;
+  height: 19px;
+  border: none;
+  background: transparent url(like-button.png) center/contain no-repeat;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.element__like-button:hover {
+  background: transparent url(like-button-hover.png) center/contain no-repeat;
+}
+
+.element__like-button:active {
+  background: transparent url(like-button-active.png) center/contain no-repeat;
+}

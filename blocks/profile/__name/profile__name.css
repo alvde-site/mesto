@@ -7,13 +7,12 @@
   line-height: 1.14;
   color: white;
   margin: 0 18px 16px 0;
-  position: relative;
 }
 
 @media (max-width: 935px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
-    margin: 0 10px 14px 42px;
+    margin: 0 10px 14px 0;
   }
 }
