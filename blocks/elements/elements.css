@@ -10,6 +10,6 @@
 @media (max-width: 935px) {
   .elements {
     grid-template-columns: 1fr;
-    justify-items: center;
+    max-width: 282px;
   }
 }
