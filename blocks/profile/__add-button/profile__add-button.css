@@ -4,7 +4,7 @@
   margin: 0 0 0 auto;
   border-radius: 2px;
   border: 2px solid #fff;
-  background: transparent url(../../../images/add-button.png) center/22px 22px no-repeat;
+  background: transparent url(add-button.png) center/22px 22px no-repeat;
 }
 
 .profile__add-button:hover {

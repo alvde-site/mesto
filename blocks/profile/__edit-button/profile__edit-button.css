@@ -2,7 +2,7 @@
   width: 24px;
   height: 24px;
   border: 1px solid #fff;
-  background: transparent url(../../../images/edit-button.png) center/10px 10px no-repeat;
+  background: transparent url(edit-button.png) center/10px 10px no-repeat;
 }
 
 .profile__edit-button:hover {
