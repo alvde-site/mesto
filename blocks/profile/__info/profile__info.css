@@ -1,9 +1,3 @@
 .profile__info {
   min-width: 336px;
 }
-
-@media (max-width: 935px) {
-  .profile__info {
-    text-align: center;
-  }
-}
