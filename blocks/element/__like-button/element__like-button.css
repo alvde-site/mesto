@@ -2,13 +2,14 @@
   width: 22px;
   height: 19px;
   border: none;
-  background: transparent url(like-button.png) center/contain no-repeat;
+  background: transparent url(like-button.svg) center/contain no-repeat;
+  padding: 0;
 }
 
 .element__like-button:hover {
-  background: transparent url(like-button-hover.png) center/contain no-repeat;
+  background: transparent url(like-hover.svg) center/contain no-repeat;
 }
 
 .element__like-button:active {
-  background: transparent url(like-button-active.png) center/contain no-repeat;
+  background: transparent url(like-active.svg) center/contain no-repeat;
 }
