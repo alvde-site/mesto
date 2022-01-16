@@ -1,4 +1,4 @@
-.popup__submit {
+.edit-form__submit {
   box-sizing: border-box;
   width: 100%;
   height: 50px;
@@ -14,12 +14,12 @@
   padding: 0;
 }
 
-.popup__submit:hover {
+.edit-form__submit:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 935px) {
-  .popup__submit {
+  .edit-form__submit {
     font-size: 14px;
     line-height: 17px;
   }
