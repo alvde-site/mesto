@@ -4,8 +4,10 @@
   margin: 0 0 0 auto;
   border-radius: 2px;
   border: 2px solid #fff;
-  background: transparent url(add-button.svg) center/22px 22px no-repeat;
+  background: transparent url(../../../images/svg/add-button.svg) center/22px 22px no-repeat;
   padding: 0;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .profile__add-button:hover {

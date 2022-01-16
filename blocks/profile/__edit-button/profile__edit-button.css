@@ -4,6 +4,8 @@
   border: none;
   background: transparent url(../../../images/svg/edit-button.svg) center/contain no-repeat;
   padding: 0;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .profile__edit-button:hover {
