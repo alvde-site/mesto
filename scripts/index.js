@@ -19,7 +19,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    popup.classList.remove('popup_opened');
+    popupClose();
 }
 
 function popupClose () {

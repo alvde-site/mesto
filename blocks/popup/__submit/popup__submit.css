@@ -10,6 +10,8 @@
   font-size: 18px;
   line-height: 22px;
   color: #fff;
+  border: none;
+  padding: 0;
 }
 
 .popup__submit:hover {

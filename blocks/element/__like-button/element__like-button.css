@@ -7,9 +7,10 @@
 }
 
 .element__like-button:hover {
-  background: transparent url(like-hover.svg) center/contain no-repeat;
+  opacity: 0.5;
 }
 
 .element__like-button:active {
+  opacity: 1;
   background: transparent url(like-active.svg) center/contain no-repeat;
 }
