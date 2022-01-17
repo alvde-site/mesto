@@ -89,14 +89,12 @@
     </footer>
     <div class="popup">
       <div class="popup__container">
-        <button class="popup__close" type="button" aria-label="Закрыть">
-          <img src="./images/svg/close-icon.svg" alt="Закрыть" class="popup__close-icon">
-        </button>
-        <form action="#" name="editform" class="edit-form">
-          <h3 class="edit-form__title">Редактировать профиль</h3>
-          <input type="text" class="edit-form__input edit-form__input_profile_name" name="profilename">
-          <input type="text" class="edit-form__input edit-form__input_profile_job" name="profilejob">
-          <button class="edit-form__submit" type="submit">Сохранить</button>
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form action="#" name="form" class="form">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required>
+          <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required>
+          <button class="form__submit" type="submit">Сохранить</button>
         </form>
       </div>
     </div>

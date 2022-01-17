@@ -38,10 +38,9 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__close-icon/popup__close-icon.css);
 
-/* edit-form в блоке popup */
+/* form в блоке popup */
 
-@import url(../blocks/edit-form/__title/edit-form__title.css);
-@import url(../blocks/edit-form/__input/edit-form__input.css);
-@import url(../blocks/edit-form/__submit/edit-form__submit.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__submit/form__submit.css);

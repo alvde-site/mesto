@@ -1,4 +1,4 @@
-.edit-form__submit {
+.form__submit {
   box-sizing: border-box;
   width: 100%;
   height: 50px;
@@ -16,12 +16,12 @@
   transition: 0.2s;
 }
 
-.edit-form__submit:hover {
+.form__submit:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 935px) {
-  .edit-form__submit {
+  .form__submit {
     font-size: 14px;
     line-height: 17px;
   }

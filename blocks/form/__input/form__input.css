@@ -1,4 +1,4 @@
-.edit-form__input {
+.form__input {
   box-sizing: border-box;
   width: 100%;
   padding: 13px 0;
@@ -13,12 +13,12 @@
   margin: 0 0 15px;
 }
 
-.edit-form__input:last-of-type {
+.form__input:last-of-type {
   margin: 0 0 48px;
 }
 
 @media (max-width: 935px) {
-  .edit-form__input:last-of-type {
+  .form__input:last-of-type {
     margin: 0 0 45px;
   }
 }

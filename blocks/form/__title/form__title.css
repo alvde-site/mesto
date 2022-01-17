@@ -1,4 +1,4 @@
-.edit-form__title {
+.form__title {
   margin: 0 0 40px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 935px) {
-  .edit-form__title {
+  .form__title {
     font-size: 18px;
     line-height: 22px;
     margin: 0 0 60px;
