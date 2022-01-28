@@ -65,6 +65,7 @@ function popupOpenEditForm () {
 
   closeButton.addEventListener('click', popupClose);
   formElement.addEventListener('submit', formSubmitHandler);
+  formElement.addEventListener('submit', saveInnerTextToProfile)
 }
 
 function popupOpenAddElementForm () {
@@ -83,11 +84,14 @@ function popupClose (item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
+function saveInnerTextToProfile() {
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+}
+
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
     popupClose(evt);
 }
 
