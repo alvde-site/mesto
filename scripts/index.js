@@ -1,11 +1,12 @@
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
-let popup = document.querySelector('.popup');
+let popupEditForm = document.querySelector('.popup_form_edit');
+let popupAddForm = document.querySelector('.popup_form_add');
 let formElement = document.querySelector('.form');
 let nameInput = document.querySelector('.form__input_profile_name');
 let jobInput = document.querySelector('.form__input_profile_job');
 let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close');
+let addButton = document.querySelector('.profile__add-button');
 
 //Создание карточек
 
@@ -52,14 +53,31 @@ function renderElement(item) {
 
 render();
 
-//Открытие popup
+//открыть popups
 
-function popupOpen () {
-  popup.classList.add('popup_opened');
+function popupOpenEditForm () {
+  let closeButton = popupEditForm.querySelector('.popup__close');
+  popupEditForm.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+
+  closeButton.addEventListener('click', popupClose);
+
 }
 
+function popupOpenAddForm () {
+  let closeButton = popupAddForm.querySelector('.popup__close');
+  popupAddForm.classList.add('popup_opened');
+
+  closeButton.addEventListener('click', popupClose);
+}
+
+
+
+// Закрыть popups
+function popupClose (item) {
+  item.target.closest('.popup').classList.remove('popup_opened');
+}
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
@@ -68,11 +86,10 @@ function formSubmitHandler (evt) {
     popupClose();
 }
 
-// Закрытие popup
-function popupClose () {
-  popup.classList.remove('popup_opened');
-}
 
-editButton.addEventListener('click', popupOpen);
+
+editButton.addEventListener('click', popupOpenEditForm);
+addButton.addEventListener('click', popupOpenAddForm);
 formElement.addEventListener('submit', formSubmitHandler);
-closeButton.addEventListener('click', popupClose);
+
+//popup для addElementForm

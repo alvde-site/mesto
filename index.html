@@ -54,14 +54,25 @@
         </div>
       </li>
     </template>
-    <div class="popup">
+    <div class="popup popup_form_edit">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form action="#" name="form" class="form">
           <h2 class="form__title">Редактировать профиль</h2>
           <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required>
           <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required>
-          <button class="form__submit" type="submit">Сохранить</button>
+          <button class="form__submit form__submit_edit-form" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_form_add">
+      <div class="popup__container">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form action="#" name="form" class="form">
+          <h2 class="form__title">Новое место</h2>
+          <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Название" required>
+          <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Ссылка на картинку" required>
+          <button class="form__submit form__submit_add-form" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
