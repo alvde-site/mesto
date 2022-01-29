@@ -48,7 +48,7 @@ function renderElement(item) {
 
   newElement.querySelector('.element__description-text').innerText = item.name;
   newElement.querySelector('.element__img').src = item.link;
-  elements.appendChild(newElement);
+  elements.append(newElement);
 }
 
 render();
@@ -65,7 +65,7 @@ function popupOpenEditForm () {
 
   closeButton.addEventListener('click', popupClose);
   formElement.addEventListener('submit', formSubmitHandler);
-  formElement.addEventListener('submit', saveInnerTextToProfile)
+  formElement.addEventListener('submit', setProfileText)
 }
 
 function popupOpenAddElementForm () {
@@ -76,6 +76,7 @@ function popupOpenAddElementForm () {
 
   closeButton.addEventListener('click', popupClose);
   formElement.addEventListener('submit', formSubmitHandler);
+  formElement.addEventListener('submit', setElementContent);
 }
 
 // Закрыть popups
@@ -84,9 +85,20 @@ function popupClose (item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
-function saveInnerTextToProfile() {
+//Настройка элементов введенными данными из формы
+
+function setProfileText() {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+}
+
+function setElementContent() {
+  const newElement = template.cloneNode(true);
+  const addElementName = document.querySelector('.form__input_add_name').value;
+  const addElementLink = document.querySelector('.form__input_add_link').value;
+  newElement.querySelector('.element__description-text').innerText =  addElementName;
+  newElement.querySelector('.element__img').src = addElementLink;
+  elements.prepend(newElement);
 }
 
 // Обработчик «отправки» формы
