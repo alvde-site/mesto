@@ -52,12 +52,16 @@ function renderElement(item) {
   newElement.querySelector('.element__img').src = item.link;
   elements.append(newElement);
 
-  likeButton.addEventListener('click', addLikeToButton);
+  addListener(likeButton);
 }
 
 render();
 
 //Добавление лайка
+
+function addListener(el) {
+  el.addEventListener('click', addLikeToButton);
+}
 
 function addLikeToButton (button) {
   button.target.classList.toggle('element__like-button_active');
@@ -106,9 +110,13 @@ function setElementContent() {
   const newElement = template.cloneNode(true);
   const addElementName = document.querySelector('.form__input_add_name').value;
   const addElementLink = document.querySelector('.form__input_add_link').value;
+  const likeButton = newElement.querySelector('.element__like-button');
+
   newElement.querySelector('.element__description-text').innerText =  addElementName;
   newElement.querySelector('.element__img').src = addElementLink;
+
   elements.prepend(newElement);
+  addListener(likeButton);
 }
 
 // Обработчик «отправки» формы
