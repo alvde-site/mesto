@@ -1,0 +1,25 @@
+.image-viewing__close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  background: transparent url(../../../images/svg/close-icon.svg) center/contain no-repeat;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.image-viewing__close:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 935px) {
+  .image-viewing__close {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

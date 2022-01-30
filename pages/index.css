@@ -46,3 +46,11 @@
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__submit/form__submit.css);
+
+/* Просмотр фото в блоке popup */
+
+@import url(../blocks/image-viewing/image-viewing.css);
+@import url(../blocks/image-viewing/__img-card/image-viewing__img-card.css);
+@import url(../blocks/image-viewing/__close/image-viewing__close.css);
+@import url(../blocks/image-viewing/__image/image-viewing__image.css);
+@import url(../blocks/image-viewing/__caption/image-viewing__caption.css);
