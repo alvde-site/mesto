@@ -51,9 +51,10 @@ function renderElement(item) {
   const likeButton = newElement.querySelector('.element__like-button');
   const removeButton = newElement.querySelector('.element__remove-button');
   const imageView = newElement.querySelector('.element__img');
-
-  newElement.querySelector('.element__description-text').innerText = item.name;
-  newElement.querySelector('.element__img').src = item.link;
+  const imageCaption = newElement.querySelector('.element__description-text');
+  const imageSrc = newElement.querySelector('.element__img');
+  imageCaption.innerText = item.name;
+  imageSrc.src = item.link;
   elements.append(newElement);
 
   addListener(likeButton, removeButton, imageView);
@@ -143,12 +144,11 @@ function formSubmitHandler (evt) {
 
 function viewImage(img) {
   const imageSrc = img.target.getAttribute('src');
-  const imageAlt = img.target.getAttribute('alt');
+  const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
   const closeButton = popupImageViewing.querySelector('.image-viewing__close');
 
   popupImage.setAttribute('src', imageSrc);
-  popupCaption.innerText = imageAlt;
-
+  popupCaption.innerText = imageCaption;
   popupImageViewing.classList.add('popup_opened');
   closeButton.addEventListener('click', popupClose);
 }
