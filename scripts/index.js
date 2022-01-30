@@ -7,6 +7,8 @@ const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const popupImage = document.querySelector('.image-viewing__image');
+const popupCaption = document.querySelector('.image-viewing__caption')
 
 //Создание карточек
 
@@ -48,22 +50,23 @@ function renderElement(item) {
   const newElement = template.cloneNode(true);
   const likeButton = newElement.querySelector('.element__like-button');
   const removeButton = newElement.querySelector('.element__remove-button');
+  const imageView = newElement.querySelector('.element__img');
 
   newElement.querySelector('.element__description-text').innerText = item.name;
   newElement.querySelector('.element__img').src = item.link;
   elements.append(newElement);
 
-  addListener(likeButton, removeButton);
+  addListener(likeButton, removeButton, imageView);
 }
 
 render();
 
 //Добавление лайка
 
-function addListener(like, remove) {
+function addListener(like, remove, view) {
   like.addEventListener('click', addLikeToButton);
   remove.addEventListener('click', removeElement);
-
+  view.addEventListener('click', viewImage);
 }
 
 function addLikeToButton (button) {
@@ -121,12 +124,13 @@ function setElementContent() {
   const addElementLink = document.querySelector('.form__input_add_link').value;
   const likeButton = newElement.querySelector('.element__like-button');
   const removeButton = newElement.querySelector('.element__remove-button');
+  const imageView = newElement.querySelector('.element__img');
 
   newElement.querySelector('.element__description-text').innerText =  addElementName;
   newElement.querySelector('.element__img').src = addElementLink;
 
   elements.prepend(newElement);
-  addListener(likeButton, removeButton);
+  addListener(likeButton, removeButton, imageView);
 }
 
 // Обработчик «отправки» формы
@@ -135,7 +139,19 @@ function formSubmitHandler (evt) {
     popupClose(evt);
 }
 
+// Просмотр изображения
 
+function viewImage(img) {
+  const imageSrc = img.target.getAttribute('src');
+  const imageAlt = img.target.getAttribute('alt');
+  const closeButton = popupImageViewing.querySelector('.image-viewing__close');
+
+  popupImage.setAttribute('src', imageSrc);
+  popupCaption.innerText = imageAlt;
+
+  popupImageViewing.classList.add('popup_opened');
+  closeButton.addEventListener('click', popupClose);
+}
 
 editButton.addEventListener('click', popupOpenEditForm);
 addButton.addEventListener('click', popupOpenAddElementForm);
