@@ -47,24 +47,33 @@ function render () {
 function renderElement(item) {
   const newElement = template.cloneNode(true);
   const likeButton = newElement.querySelector('.element__like-button');
+  const removeButton = newElement.querySelector('.element__remove-button');
 
   newElement.querySelector('.element__description-text').innerText = item.name;
   newElement.querySelector('.element__img').src = item.link;
   elements.append(newElement);
 
-  addListener(likeButton);
+  addListener(likeButton, removeButton);
 }
 
 render();
 
 //Добавление лайка
 
-function addListener(el) {
-  el.addEventListener('click', addLikeToButton);
+function addListener(like, remove) {
+  like.addEventListener('click', addLikeToButton);
+  remove.addEventListener('click', removeElement);
+
 }
 
 function addLikeToButton (button) {
   button.target.classList.toggle('element__like-button_active');
+}
+
+//Удаление элемента со страницы
+
+function removeElement(button){
+  button.target.closest('.element').remove();
 }
 
 //открыть popups
@@ -111,12 +120,13 @@ function setElementContent() {
   const addElementName = document.querySelector('.form__input_add_name').value;
   const addElementLink = document.querySelector('.form__input_add_link').value;
   const likeButton = newElement.querySelector('.element__like-button');
+  const removeButton = newElement.querySelector('.element__remove-button');
 
   newElement.querySelector('.element__description-text').innerText =  addElementName;
   newElement.querySelector('.element__img').src = addElementLink;
 
   elements.prepend(newElement);
-  addListener(likeButton);
+  addListener(likeButton, removeButton);
 }
 
 // Обработчик «отправки» формы
