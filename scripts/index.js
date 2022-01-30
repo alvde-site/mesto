@@ -1,7 +1,8 @@
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const popupEditForm = document.querySelector('.popup_form_edit');
-const popupAddForm = document.querySelector('.popup_form_add');
+const popupEditForm = document.querySelector('.popup_handle_profile');
+const popupAddForm = document.querySelector('.popup_handle_add-element');
+const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const editButton = document.querySelector('.profile__edit-button');
@@ -45,13 +46,22 @@ function render () {
 
 function renderElement(item) {
   const newElement = template.cloneNode(true);
+  const likeButton = newElement.querySelector('.element__like-button');
 
   newElement.querySelector('.element__description-text').innerText = item.name;
   newElement.querySelector('.element__img').src = item.link;
   elements.append(newElement);
+
+  likeButton.addEventListener('click', addLikeToButton);
 }
 
 render();
+
+//Добавление лайка
+
+function addLikeToButton (button) {
+  button.target.classList.toggle('element__like-button_active');
+}
 
 //открыть popups
 
