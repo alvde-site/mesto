@@ -114,8 +114,20 @@ function viewImage(img) {
   popupImage.setAttribute('src', imageSrc);
   popupCaption.innerText = imageCaption;
   popupImageViewing.classList.add('popup_opened');
-  closeButton.addEventListener('click', popupClose);
+  addListenterToCloseButton(closeButton);
 }
+
+// Добавление слушателя закрытию карточки
+
+function addListenterToCloseButton(button) {
+  button.addEventListener('click', popupClose);
+}
+
+// Добавление слушателя при submit формам
+
+function addListenerToSubmitForm(submitButton) {
+  submitButton.addEventListener('submit', formSubmitHandler);
+};
 
 //Popup редактирования профиля
 
@@ -132,8 +144,8 @@ function popupOpenEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
-  closeButton.addEventListener('click', popupClose);
-  formElement.addEventListener('submit', formSubmitHandler);
+  addListenterToCloseButton(closeButton);
+  addListenerToSubmitForm(formElement);
   formElement.addEventListener('submit', setProfileText)
 }
 
@@ -143,8 +155,8 @@ function popupOpenAddElementForm () {
 
   popupAddForm.classList.add('popup_opened');
 
-  closeButton.addEventListener('click', popupClose);
-  formElement.addEventListener('submit', formSubmitHandler);
+  addListenterToCloseButton(closeButton);
+  addListenerToSubmitForm(formElement);
   formElement.addEventListener('submit', setElementContent);
 }
 
