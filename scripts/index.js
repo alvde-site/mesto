@@ -47,19 +47,42 @@ function render () {
 }
 
 function renderElement(item) {
-  const newElement = template.cloneNode(true); //  Создаваемая карточка
+  const newElement = template.cloneNode(true); //  Клон создаваемой карточки
   const removeButton = newElement.querySelector('.element__remove-button'); // Кнопка удаления карточки
   const imageSrc = newElement.querySelector('.element__img'); // Изображение карточки
   const likeButton = newElement.querySelector('.element__like-button'); // Кнопка like карточки
   const imageCaption = newElement.querySelector('.element__description-text'); // Название карточки
+
   imageCaption.innerText = item.name; // Настройка названия карточки
   imageSrc.src = item.link; // Кнопка изображения карточки
-  elements.append(newElement);
 
   addListenerToElement(likeButton, removeButton, imageSrc);
+  elements.append(newElement);
 }
 
 render(); // Создаем карточки при загрузке страницы
+
+//Создаем карточки введенными данными из формы
+
+
+function setElementContent() {
+  const newElement = template.cloneNode(true);
+  const removeButton = newElement.querySelector('.element__remove-button');
+  const imageSrc = newElement.querySelector('.element__img');
+  const likeButton = newElement.querySelector('.element__like-button');
+  const imageCaption = newElement.querySelector('.element__description-text');
+
+  const addElementName = document.querySelector('.form__input_add_name').value;
+  const addElementLink = document.querySelector('.form__input_add_link').value;
+
+  imageCaption.innerText =  addElementName;
+  imageSrc.src = addElementLink;
+
+  addListenerToElement(likeButton, removeButton, imageSrc);
+  elements.prepend(newElement);
+
+}
+
 
 //Добавление слушателей карточкам
 
@@ -81,7 +104,25 @@ function removeElement(button){
   button.target.closest('.element').remove();
 }
 
+// Просмотр изображения
+
+function viewImage(img) {
+  const imageSrc = img.target.getAttribute('src');
+  const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
+  const closeButton = popupImageViewing.querySelector('.image-viewing__close');
+
+  popupImage.setAttribute('src', imageSrc);
+  popupCaption.innerText = imageCaption;
+  popupImageViewing.classList.add('popup_opened');
+  closeButton.addEventListener('click', popupClose);
+}
+
 //Popup редактирования профиля
+
+function setProfileText() {
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+}
 
 function popupOpenEditForm () {
   const closeButton = popupEditForm.querySelector('.popup__close');
@@ -113,27 +154,6 @@ function popupClose (item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
-//Настройка элементов введенными данными из формы
-
-function setProfileText() {
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-}
-
-function setElementContent() {
-  const newElement = template.cloneNode(true);
-  const addElementName = document.querySelector('.form__input_add_name').value;
-  const addElementLink = document.querySelector('.form__input_add_link').value;
-  const likeButton = newElement.querySelector('.element__like-button');
-  const removeButton = newElement.querySelector('.element__remove-button');
-  const imageSrc = newElement.querySelector('.element__img');
-
-  newElement.querySelector('.element__description-text').innerText =  addElementName;
-  newElement.querySelector('.element__img').src = addElementLink;
-
-  elements.prepend(newElement);
-  addListenerToElement(likeButton, removeButton, imageSrc);
-}
 
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
@@ -141,18 +161,6 @@ function formSubmitHandler (evt) {
     popupClose(evt);
 }
 
-// Просмотр изображения
-
-function viewImage(img) {
-  const imageSrc = img.target.getAttribute('src');
-  const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
-  const closeButton = popupImageViewing.querySelector('.image-viewing__close');
-
-  popupImage.setAttribute('src', imageSrc);
-  popupCaption.innerText = imageCaption;
-  popupImageViewing.classList.add('popup_opened');
-  closeButton.addEventListener('click', popupClose);
-}
 
 editButton.addEventListener('click', popupOpenEditForm);
 addButton.addEventListener('click', popupOpenAddElementForm);
