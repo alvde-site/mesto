@@ -163,7 +163,6 @@ function closePopup (item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
-
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
