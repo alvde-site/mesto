@@ -1,19 +1,19 @@
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-const popupEditForm = document.querySelector('.popup_handle_profile');
-const popupAddForm = document.querySelector('.popup_handle_add-element');
-const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
+const profileName = document.querySelector('.profile__name'); // Имя профиля
+const profileJob = document.querySelector('.profile__job');  // Профессия профиля
+const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
+const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup форма заполнения профиля данными от пользователя
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
+const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup форма создания карточки данными от пользователя
+const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption')
 
 //Создание карточек
 
-const template = document.querySelector('#element_template').content;
-const elements = document.querySelector('.elements__container');
+const template = document.querySelector('#element_template').content; // Шаблон карточки
+const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 const initialCards = [
   {
     name: 'Архыз',
