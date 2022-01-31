@@ -6,9 +6,11 @@ const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup форма создания карточки данными от пользователя
+const addElementName = document.querySelector('.form__input_add_name').value;
+const addElementLink = document.querySelector('.form__input_add_link').value;
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
-const popupCaption = document.querySelector('.image-viewing__caption')
+const popupCaption = document.querySelector('.image-viewing__caption');
 
 //Создание карточек
 
@@ -78,8 +80,6 @@ function setElementContent() {
   const imageSrc = newElement.querySelector('.element__img');
   const likeButton = newElement.querySelector('.element__like-button');
   const imageCaption = newElement.querySelector('.element__description-text');
-  const addElementName = document.querySelector('.form__input_add_name').value;
-  const addElementLink = document.querySelector('.form__input_add_link').value;
 
   imageCaption.innerText =  addElementName;
   imageSrc.src = addElementLink;
@@ -104,7 +104,7 @@ function removeElement(button){
 // Добавление слушателя закрытию карточки
 
 function addListenterToCloseButton(button) {
-  button.addEventListener('click', popupClose);
+  button.addEventListener('click', closePopup);
 }
 
 // Просмотр изображения
@@ -133,7 +133,7 @@ function setProfileText() {
   profileJob.textContent = jobInput.value;
 }
 
-function popupOpenEditForm () {
+function openPopupEditForm () {
   const closeButton = popupEditForm.querySelector('.popup__close');
   const formElement = popupEditForm.querySelector('.form');
 
@@ -146,7 +146,7 @@ function popupOpenEditForm () {
   formElement.addEventListener('submit', setProfileText)
 }
 
-function popupOpenAddElementForm () {
+function openPopupAddElementForm () {
   const closeButton = popupAddForm.querySelector('.popup__close');
   const formElement = popupAddForm.querySelector('.form');
 
@@ -159,7 +159,7 @@ function popupOpenAddElementForm () {
 
 // Закрыть popups
 
-function popupClose (item) {
+function closePopup (item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
@@ -167,9 +167,9 @@ function popupClose (item) {
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
-    popupClose(evt);
+    closePopup(evt);
 }
 
 
-editButton.addEventListener('click', popupOpenEditForm);
-addButton.addEventListener('click', popupOpenAddElementForm);
+editButton.addEventListener('click', openPopupEditForm);
+addButton.addEventListener('click', openPopupAddElementForm);
