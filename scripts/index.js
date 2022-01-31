@@ -41,6 +41,13 @@ const initialCards = [
   }
 ];
 
+//Добавление слушателей карточкам
+
+function addListenerToElement(like, remove, src) {
+  like.addEventListener('click', addLikeToButton);
+  remove.addEventListener('click', removeElement);
+  src.addEventListener('click', viewImage);
+}
 
 function render () {
   initialCards.forEach(renderElement);
@@ -71,7 +78,6 @@ function setElementContent() {
   const imageSrc = newElement.querySelector('.element__img');
   const likeButton = newElement.querySelector('.element__like-button');
   const imageCaption = newElement.querySelector('.element__description-text');
-
   const addElementName = document.querySelector('.form__input_add_name').value;
   const addElementLink = document.querySelector('.form__input_add_link').value;
 
@@ -80,17 +86,8 @@ function setElementContent() {
 
   addListenerToElement(likeButton, removeButton, imageSrc);
   elements.prepend(newElement);
-
 }
 
-
-//Добавление слушателей карточкам
-
-function addListenerToElement(like, remove, src) {
-  like.addEventListener('click', addLikeToButton);
-  remove.addEventListener('click', removeElement);
-  src.addEventListener('click', viewImage);
-}
 
 // Переключение класса у like кнопки
 
@@ -104,6 +101,12 @@ function removeElement(button){
   button.target.closest('.element').remove();
 }
 
+// Добавление слушателя закрытию карточки
+
+function addListenterToCloseButton(button) {
+  button.addEventListener('click', popupClose);
+}
+
 // Просмотр изображения
 
 function viewImage(img) {
@@ -115,12 +118,6 @@ function viewImage(img) {
   popupCaption.innerText = imageCaption;
   popupImageViewing.classList.add('popup_opened');
   addListenterToCloseButton(closeButton);
-}
-
-// Добавление слушателя закрытию карточки
-
-function addListenterToCloseButton(button) {
-  button.addEventListener('click', popupClose);
 }
 
 // Добавление слушателя при submit формам
