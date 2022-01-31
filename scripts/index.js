@@ -47,40 +47,41 @@ function render () {
 }
 
 function renderElement(item) {
-  const newElement = template.cloneNode(true);
-  const likeButton = newElement.querySelector('.element__like-button');
-  const removeButton = newElement.querySelector('.element__remove-button');
-  const imageView = newElement.querySelector('.element__img');
-  const imageCaption = newElement.querySelector('.element__description-text');
-  const imageSrc = newElement.querySelector('.element__img');
-  imageCaption.innerText = item.name;
-  imageSrc.src = item.link;
+  const newElement = template.cloneNode(true); //  Создаваемая карточка
+  const removeButton = newElement.querySelector('.element__remove-button'); // Кнопка удаления карточки
+  const imageSrc = newElement.querySelector('.element__img'); // Изображение карточки
+  const likeButton = newElement.querySelector('.element__like-button'); // Кнопка like карточки
+  const imageCaption = newElement.querySelector('.element__description-text'); // Название карточки
+  imageCaption.innerText = item.name; // Настройка названия карточки
+  imageSrc.src = item.link; // Кнопка изображения карточки
   elements.append(newElement);
 
-  addListener(likeButton, removeButton, imageView);
+  addListenerToElement(likeButton, removeButton, imageSrc);
 }
 
-render();
+render(); // Создаем карточки при загрузке страницы
 
-//Добавление лайка
+//Добавление слушателей карточкам
 
-function addListener(like, remove, view) {
+function addListenerToElement(like, remove, src) {
   like.addEventListener('click', addLikeToButton);
   remove.addEventListener('click', removeElement);
-  view.addEventListener('click', viewImage);
+  src.addEventListener('click', viewImage);
 }
+
+// Переключение класса у like кнопки
 
 function addLikeToButton (button) {
   button.target.classList.toggle('element__like-button_active');
 }
 
-//Удаление элемента со страницы
+//Удаление карточки со страницы
 
 function removeElement(button){
   button.target.closest('.element').remove();
 }
 
-//открыть popups
+//Popup редактирования профиля
 
 function popupOpenEditForm () {
   const closeButton = popupEditForm.querySelector('.popup__close');
@@ -125,13 +126,13 @@ function setElementContent() {
   const addElementLink = document.querySelector('.form__input_add_link').value;
   const likeButton = newElement.querySelector('.element__like-button');
   const removeButton = newElement.querySelector('.element__remove-button');
-  const imageView = newElement.querySelector('.element__img');
+  const imageSrc = newElement.querySelector('.element__img');
 
   newElement.querySelector('.element__description-text').innerText =  addElementName;
   newElement.querySelector('.element__img').src = addElementLink;
 
   elements.prepend(newElement);
-  addListener(likeButton, removeButton, imageView);
+  addListenerToElement(likeButton, removeButton, imageSrc);
 }
 
 // Обработчик «отправки» формы
