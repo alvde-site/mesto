@@ -6,8 +6,8 @@ const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup форма создания карточки данными от пользователя
-const addElementName = document.querySelector('.form__input_add_name').value;
-const addElementLink = document.querySelector('.form__input_add_link').value;
+const addElementName = document.querySelector('.form__input_add_name');
+const addElementLink = document.querySelector('.form__input_add_link');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
@@ -80,12 +80,12 @@ function setElementContent() {
   const imageSrc = newElement.querySelector('.element__img');
   const likeButton = newElement.querySelector('.element__like-button');
   const imageCaption = newElement.querySelector('.element__description-text');
-
-  imageCaption.innerText =  addElementName;
-  imageSrc.src = addElementLink;
+  imageCaption.innerText =  addElementName.value;
+  imageSrc.src = addElementLink.value;
 
   addListenerToElement(likeButton, removeButton, imageSrc);
   elements.prepend(newElement);
+  console.log('Значение' + addElementName);
 }
 
 
