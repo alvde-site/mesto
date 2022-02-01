@@ -42,6 +42,11 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+// Открыть popup
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
 
 //Добавление слушателей карточкам
 
@@ -62,7 +67,13 @@ const renderElement = (card, wrap) => {
 function addCardContent(name, link, data) {
   name.innerText = data.name; // Настройка названия карточки
   link.src = data.link; // Кнопка изображения карточки
-  link.alt = data.name;
+  link.alt = data.name; // Настройка alt изображения
+}
+
+function addUserCardContent(name, link) {
+  name.innerText =  addElementName.value;
+  link.src = addElementLink.value;
+  name.alt = addElementName.value;
 }
 
 function createCard(item) {
@@ -94,9 +105,9 @@ function setElementContent() {
   imageSrc.src = addElementLink.value;
   imageSrc.alt = addElementName.value;
 
+  addUserCardContent(imageCaption, imageSrc);
   addListenerToElement(likeButton, removeButton, imageSrc);
   elements.prepend(newElement);
-  console.log('Значение' + addElementName);
 }
 
 
@@ -127,7 +138,7 @@ function viewImage(img) {
 
   popupImage.setAttribute('src', imageSrc);
   popupCaption.innerText = imageCaption;
-  popupImageViewing.classList.add('popup_opened');
+  openPopup(popupImageViewing);
   addListenterToCloseButton(closeButton);
 }
 
@@ -148,7 +159,7 @@ function openPopupEditForm () {
   const closeButton = popupEditForm.querySelector('.popup__close');
   const formElement = popupEditForm.querySelector('.form');
 
-  popupEditForm.classList.add('popup_opened');
+  openPopup(popupEditForm);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
@@ -161,7 +172,7 @@ function openPopupAddElementForm () {
   const closeButton = popupAddForm.querySelector('.popup__close');
   const formElement = popupAddForm.querySelector('.form');
 
-  popupAddForm.classList.add('popup_opened');
+  openPopup(popupAddForm);
 
   addListenterToCloseButton(closeButton);
   addListenerToSubmitForm(formElement);
@@ -179,7 +190,6 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
     closePopup(evt);
 }
-
 
 editButton.addEventListener('click', openPopupEditForm);
 addButton.addEventListener('click', openPopupAddElementForm);
