@@ -52,21 +52,31 @@ function addListenerToElement(like, remove, src) {
 }
 
 function render () {
-  initialCards.forEach(renderElement);
+  initialCards.forEach(createCard);
 }
 
-function renderElement(item) {
+const renderElement = (card, wrap) => {
+  wrap.append(card);
+}
+
+function addCardContent(name, link, data) {
+  name.innerText = data.name; // Настройка названия карточки
+  link.src = data.link; // Кнопка изображения карточки
+  link.alt = data.name;
+}
+
+function createCard(item) {
   const newElement = template.cloneNode(true); //  Клон создаваемой карточки
   const removeButton = newElement.querySelector('.element__remove-button'); // Кнопка удаления карточки
   const imageSrc = newElement.querySelector('.element__img'); // Изображение карточки
   const likeButton = newElement.querySelector('.element__like-button'); // Кнопка like карточки
   const imageCaption = newElement.querySelector('.element__description-text'); // Название карточки
 
-  imageCaption.innerText = item.name; // Настройка названия карточки
-  imageSrc.src = item.link; // Кнопка изображения карточки
+  addCardContent(imageCaption, imageSrc, item);
 
   addListenerToElement(likeButton, removeButton, imageSrc);
-  elements.append(newElement);
+
+  renderElement(newElement, elements);
 }
 
 render(); // Создаем карточки при загрузке страницы
@@ -82,6 +92,7 @@ function setElementContent() {
   const imageCaption = newElement.querySelector('.element__description-text');
   imageCaption.innerText =  addElementName.value;
   imageSrc.src = addElementLink.value;
+  imageSrc.alt = addElementName.value;
 
   addListenerToElement(likeButton, removeButton, imageSrc);
   elements.prepend(newElement);
