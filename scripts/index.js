@@ -181,8 +181,8 @@ function openPopupAddElementForm () {
 
 // Закрыть popups
 
-function closePopup (item) {
-  item.target.closest('.popup').classList.remove('popup_opened');
+function closePopup (popup) {
+  popup.target.closest('.popup').classList.remove('popup_opened');
 }
 
 // Обработчик «отправки» формы
