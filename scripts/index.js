@@ -15,6 +15,7 @@ const popupAddFormElement = popupAddForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
 const addElementLink = document.querySelector('.form__input_add_link');
 const popupAddFormSubmit = popupAddForm.querySelector('.form__submit_add-form');
+popupAddFormSubmit.addEventListener('click', submitCardForm);
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const closeButton = popupImageViewing.querySelector('.image-viewing__close');
 const popupImage = document.querySelector('.image-viewing__image');
@@ -115,11 +116,7 @@ function setElementContent() {
   addUserCardContent(imageCaption, imageSrc);
   addListenerToElement(likeButton, removeButton, imageSrc);
   elements.prepend(newElement);
-  formSubmitHandler (popupAddFormSubmit);
 }
-
-popupAddFormSubmit.addEventListener('click', setElementContent);
-
 
 // Переключение класса у like кнопки
 
@@ -154,12 +151,6 @@ function viewImage(img) {
   openPopup(popupImageViewing);
 }
 
-// Добавление слушателя при submit формам
-
-function addListenerToSubmitForm(submitButton) {
-  submitButton.addEventListener('submit', formSubmitHandler);
-};
-
 //Popup редактирования профиля
 
 function setProfileText() {
@@ -167,11 +158,14 @@ function setProfileText() {
   profileJob.textContent = jobInput.value;
 }
 
-popupEditFormElement.addEventListener('submit', setProfileText);
-
 function submitProfileForm(evt) {
   formSubmitHandler(evt);
   setProfileText();
+}
+
+function submitCardForm(evt) {
+  formSubmitHandler(evt);
+  setElementContent();
 }
 
 function openPopupEditForm () {
