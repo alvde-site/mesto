@@ -7,7 +7,6 @@ const popupEditFormElement = popupEditForm.querySelector('.form');
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const popupEditFormSubmit = popupEditForm.querySelector('.form__submit_edit-form');
-popupEditFormSubmit.addEventListener('click', submitProfileForm);
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
 const popupAddCloseButton = popupAddForm.querySelector('.popup__close');
@@ -15,7 +14,6 @@ const popupAddFormElement = popupAddForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
 const addElementLink = document.querySelector('.form__input_add_link');
 const popupAddFormSubmit = popupAddForm.querySelector('.form__submit_add-form');
-popupAddFormSubmit.addEventListener('click', submitCardForm);
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const closeButton = popupImageViewing.querySelector('.image-viewing__close');
 const popupImage = document.querySelector('.image-viewing__image');
@@ -87,10 +85,6 @@ function setElementContent() {
   const likeButton = newElement.querySelector('.element__like-button');
   const imageCaption = newElement.querySelector('.element__description-text');
 
-  imageCaption.innerText =  addElementName.value;
-  imageSrc.src = addElementLink.value;
-  imageSrc.alt = addElementName.value;
-
   addUserCardContent(imageCaption, imageSrc);
   addListenerToElement(likeButton, removeButton, imageSrc);
   renderElementAtBegin(newElement, elements);
@@ -113,6 +107,8 @@ function removeElement(button){
 function addListenterToCloseButton(button) {
   button.addEventListener('click', closePopup);
 }
+
+// Добавление слушателя закрытию popup
 
 addListenterToCloseButton(closeButton);
 addListenterToCloseButton(popupEditCloseButton);
@@ -173,3 +169,5 @@ function formSubmitHandler (evt) {
 
 editButton.addEventListener('click', openPopupEditForm);
 addButton.addEventListener('click', openPopupAddElementForm);
+popupEditFormSubmit.addEventListener('click', submitProfileForm);
+popupAddFormSubmit.addEventListener('click', submitCardForm);
