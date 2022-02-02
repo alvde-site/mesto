@@ -1,7 +1,7 @@
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
-const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup форма заполнения профиля данными от пользователя
+const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
 const popupEditCloseButton = popupEditForm.querySelector('.popup__close');
 const popupEditFormElement = popupEditForm.querySelector('.form');
 const nameInput = document.querySelector('.form__input_profile_name');
@@ -9,7 +9,7 @@ const jobInput = document.querySelector('.form__input_profile_job');
 const popupEditFormSubmit = popupEditForm.querySelector('.form__submit_edit-form');
 popupEditFormSubmit.addEventListener('click', submitProfileForm);
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
-const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup форма создания карточки данными от пользователя
+const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
 const popupAddCloseButton = popupAddForm.querySelector('.popup__close');
 const popupAddFormElement = popupAddForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
@@ -44,10 +44,6 @@ function render () {
   initialCards.forEach(createCard);
 }
 
-const renderElement = (card, wrap) => {
-  wrap.append(card);
-}
-
 function addCardContent(name, link, data) {
   name.innerText = data.name; // Настройка названия карточки
   link.src = data.link; // Кнопка изображения карточки
@@ -58,6 +54,10 @@ function addUserCardContent(name, link) {
   name.innerText = addElementName.value;
   link.src = addElementLink.value;
   name.alt = addElementName.value;
+}
+
+const renderElement = (card, wrap) => {
+  wrap.append(card);
 }
 
 function createCard(item) {
@@ -76,6 +76,9 @@ render(); // Создаем карточки при загрузке стран�
 
 //Создаем карточки введенными данными из формы
 
+const renderElementAtBegin = (card, wrap) => {
+  wrap.prepend(card);
+}
 
 function setElementContent() {
   const newElement = template.cloneNode(true);
@@ -90,7 +93,7 @@ function setElementContent() {
 
   addUserCardContent(imageCaption, imageSrc);
   addListenerToElement(likeButton, removeButton, imageSrc);
-  elements.prepend(newElement);
+  renderElementAtBegin(newElement, elements);
 }
 
 // Переключение класса у like кнопки
