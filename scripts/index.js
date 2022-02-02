@@ -55,7 +55,7 @@ function addUserCardContent(name, link) {
 }
 
 const renderElement = (card, wrap) => {
-  wrap.append(card);
+  wrap.prepend(card);
 }
 
 function createCard(item) {
@@ -72,12 +72,6 @@ function createCard(item) {
 }
 
 render(); // Создаем карточки при загрузке страницы
-
-//Создаем карточки введенными данными из формы
-
-const renderElementAtBegin = (card, wrap) => {
-  wrap.prepend(card);
-}
 
 // Переключение класса у like кнопки
 
