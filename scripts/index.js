@@ -30,6 +30,12 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+// Закрыть popups
+
+function closePopup (popup) {
+  popup.target.closest('.popup').classList.remove('popup_opened');
+}
+
 //Добавление слушателей карточкам
 
 function addListenerToElement(like, remove, src) {
@@ -42,21 +48,19 @@ function render () {
   initialCards.forEach(createCard);
 }
 
+// Заполнение карточек данными
+
 function addCardContent(name, link, formData) {
   name.innerText = formData.name; // Настройка названия карточки
   link.src = formData.link; // Кнопка изображения карточки
   link.alt = formData.name; // Настройка alt изображения
 }
 
-function addUserCardContent(name, link) {
-  name.innerText = addElementName.value;
-  link.src = addElementLink.value;
-  name.alt = addElementName.value;
-}
-
 const renderElement = (card, wrap) => {
   wrap.prepend(card);
 }
+
+// Создание новой карточки
 
 function createCard(item) {
   const newElement = template.cloneNode(true); //  Клон создаваемой карточки
@@ -139,12 +143,6 @@ function openPopupEditForm () {
 function openPopupAddElementForm () {
   openPopup(popupAddForm);
   addListenterToCloseButton(closeButton);
-}
-
-// Закрыть popups
-
-function closePopup (popup) {
-  popup.target.closest('.popup').classList.remove('popup_opened');
 }
 
 // Обработчик «отправки» формы
