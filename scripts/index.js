@@ -42,10 +42,10 @@ function render () {
   initialCards.forEach(createCard);
 }
 
-function addCardContent(name, link, data) {
-  name.innerText = data.name; // Настройка названия карточки
-  link.src = data.link; // Кнопка изображения карточки
-  link.alt = data.name; // Настройка alt изображения
+function addCardContent(name, link, formData) {
+  name.innerText = formData.name; // Настройка названия карточки
+  link.src = formData.link; // Кнопка изображения карточки
+  link.alt = formData.name; // Настройка alt изображения
 }
 
 function addUserCardContent(name, link) {
