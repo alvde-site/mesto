@@ -166,6 +166,8 @@ function submitProfileForm(evt) {
 function submitCardForm(evt) {
   formSubmitHandler(evt);
   setElementContent();
+  popupAddFormElement.reset();
+
 }
 
 function openPopupEditForm () {
