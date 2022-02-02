@@ -65,6 +65,7 @@ function createCard(item) {
   const likeButton = newElement.querySelector('.element__like-button'); // Кнопка like карточки
   const imageCaption = newElement.querySelector('.element__description-text'); // Название карточки
 
+
   addCardContent(imageCaption, imageSrc, item);
   addListenerToElement(likeButton, removeButton, imageSrc);
   renderElement(newElement, elements);
@@ -76,18 +77,6 @@ render(); // Создаем карточки при загрузке стран�
 
 const renderElementAtBegin = (card, wrap) => {
   wrap.prepend(card);
-}
-
-function setElementContent() {
-  const newElement = template.cloneNode(true);
-  const removeButton = newElement.querySelector('.element__remove-button');
-  const imageSrc = newElement.querySelector('.element__img');
-  const likeButton = newElement.querySelector('.element__like-button');
-  const imageCaption = newElement.querySelector('.element__description-text');
-
-  addUserCardContent(imageCaption, imageSrc);
-  addListenerToElement(likeButton, removeButton, imageSrc);
-  renderElementAtBegin(newElement, elements);
 }
 
 // Переключение класса у like кнопки
@@ -138,10 +127,13 @@ function submitProfileForm(evt) {
 }
 
 function submitCardForm(evt) {
+  const dataAddForm = {
+    name: addElementName.value,
+    link: addElementLink.value
+  }
+  createCard(dataAddForm);
   formSubmitHandler(evt);
-  setElementContent();
   popupAddFormElement.reset();
-
 }
 
 function openPopupEditForm () {
