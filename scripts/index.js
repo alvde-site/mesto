@@ -109,9 +109,9 @@ function viewImage(img) {
   const imageSrc = img.target.getAttribute('src');
   const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
 
-  popupImage.setAttribute('src', imageSrc);
-  popupImage.setAttribute('alt', imageCaption);
-  popupCaption.innerText = imageCaption;
+  popupImage.setAttribute('src', imageSrc); //Настройка src фото
+  popupImage.setAttribute('alt', imageCaption); // Настройка alt фото
+  popupCaption.innerText = imageCaption; // Настройка заголовка фото
   openPopup(popupImageViewing);
 }
 
