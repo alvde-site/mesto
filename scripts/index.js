@@ -45,7 +45,10 @@ function addListenerToElement(like, remove, src) {
 }
 
 function render () {
-  initialCards.forEach(createCard);
+  initialCards.forEach(item => {
+    const card = createCard(item);
+    renderElement(card, elements);
+  });
 }
 
 // Заполнение карточек данными
@@ -69,10 +72,9 @@ function createCard(item) {
   const likeButton = newElement.querySelector('.element__like-button'); // Кнопка like карточки
   const imageCaption = newElement.querySelector('.element__description-text'); // Название карточки
 
-
   addCardContent(imageCaption, imageSrc, item);
   addListenerToElement(likeButton, removeButton, imageSrc);
-  renderElement(newElement, elements);
+  return newElement;
 }
 
 render(); // Создаем карточки при загрузке страницы
@@ -108,6 +110,7 @@ function viewImage(img) {
   const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
 
   popupImage.setAttribute('src', imageSrc);
+  popupImage.setAttribute('alt', imageCaption);
   popupCaption.innerText = imageCaption;
   openPopup(popupImageViewing);
 }
@@ -129,7 +132,8 @@ function submitCardForm(evt) {
     name: addElementName.value,
     link: addElementLink.value
   }
-  createCard(dataAddForm);
+  const card = createCard(dataAddForm);
+  renderElement(card, elements);
   formSubmitHandler(evt);
   popupAddFormElement.reset();
 }
