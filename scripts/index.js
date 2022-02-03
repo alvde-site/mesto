@@ -157,5 +157,5 @@ function formSubmitHandler (evt) {
 
 editButton.addEventListener('click', openPopupEditForm);
 addButton.addEventListener('click', openPopupAddElementForm);
-popupEditFormSubmit.addEventListener('click', submitProfileForm);
-popupAddFormSubmit.addEventListener('click', submitCardForm);
+popupEditForm.addEventListener('submit', submitProfileForm);
+popupAddForm.addEventListener('submit', submitCardForm);
