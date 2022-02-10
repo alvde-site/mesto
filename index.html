@@ -48,10 +48,10 @@
     <div class="popup popup_handle_profile">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form action="#" name="profileform" class="form">
+        <form action="#" name="profileform" class="form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
-          <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required>
-          <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required>
+          <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required minlength="2" maxlength="40">
+          <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required minlength="2" maxlength="200">
           <button class="form__submit form__submit_edit-form" type="submit">Сохранить</button>
         </form>
       </div>
@@ -59,10 +59,10 @@
     <div class="popup popup_handle_add-element">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form action="#" name="cardform" class="form">
+        <form action="#" name="cardform" class="form" novalidate>
           <h2 class="form__title">Новое место</h2>
-          <input type="text" class="form__input form__input_add_name" name="addname" placeholder="Название" required>
-          <input type="text" class="form__input form__input_add_link" name="addlink" placeholder="Ссылка на картинку" required>
+          <input type="text" class="form__input form__input_add_name" name="addname" placeholder="Название" required minlength="2" maxlength="30">
+          <input type="url" class="form__input form__input_add_link" name="addlink" placeholder="Ссылка на картинку" required>
           <button class="form__submit form__submit_add-form" type="submit">Сохранить</button>
         </form>
       </div>
