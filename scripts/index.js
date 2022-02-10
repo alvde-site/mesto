@@ -39,7 +39,7 @@ function closePopup (popup) {
 
 const setEventListeners = () => {
   popups.forEach((popup) => {
-    // каждому полю добавим обработчик события click
+    // каждому popup добавим обработчик события click
     popup.addEventListener('click', (evt) => {
         if(evt.target.classList.contains('popup')){
           evt.target.classList.remove('popup_opened');
