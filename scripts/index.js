@@ -1,3 +1,4 @@
+const popups = Array.from(document.querySelectorAll('.popup'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
@@ -36,6 +37,17 @@ function closePopup (popup) {
   popup.target.closest('.popup').classList.remove('popup_opened');
 }
 
+const setEventListeners = () => {
+  popups.forEach((popup) => {
+    // каждому полю добавим обработчик события click
+    popup.addEventListener('click', (evt) => {
+        if(evt.target.classList.contains('popup')){
+          evt.target.classList.remove('popup_opened');
+        }
+    });
+  });
+};
+setEventListeners();
 //Добавление слушателей карточкам
 
 function addListenerToElement(like, remove, src) {
