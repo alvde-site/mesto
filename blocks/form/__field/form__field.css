@@ -1,5 +1,6 @@
 .form__field {
   display: block;
+  height: 64px;
 }
 
 .form__field:last-of-type {

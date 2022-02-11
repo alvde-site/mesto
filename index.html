@@ -52,11 +52,11 @@
           <h2 class="form__title">Редактировать профиль</h2>
           <label for="profilename" class="form__field">
             <input id="profilename" type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required minlength="2" maxlength="40">
-            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+            <span id="error-profilename" class="form__input-error"></span>
           </label>
           <label for="profilejob" class="form__field">
             <input id="profilejob" type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required minlength="2" maxlength="200">
-            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+            <span id="error-profilejob" class="form__input-error"></span>
           </label>
           <button class="form__submit form__submit_edit-form" type="submit">Сохранить</button>
         </form>
@@ -69,11 +69,11 @@
           <h2 class="form__title">Новое место</h2>
           <label for="addname" class="form__field">
             <input id="addname" type="text" class="form__input form__input_add_name" name="addname" placeholder="Название" required minlength="2" maxlength="30">
-            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+            <span id="error-addname" class="form__input-error"></span>
           </label>
           <label for="addlink" class="form__field">
             <input id="addlink" type="url" class="form__input form__input_add_link" name="addlink" placeholder="Ссылка на картинку" required>
-            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+            <span id="error-addlink" class="form__input-error"></span>
           </label>
           <button class="form__submit form__submit_add-form" type="submit">Сохранить</button>
         </form>

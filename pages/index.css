@@ -43,6 +43,7 @@
 
 /* form в блоке popup */
 
+@import url(../blocks/form/form.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__input/form__input.css);
