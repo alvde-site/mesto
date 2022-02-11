@@ -10,15 +10,9 @@
   font-size: 14px;
   line-height: 17px;
   color: #000;
-  margin: 0 0 15px;
+  margin: 0 0 5px;
 }
 
-.form__input:last-of-type {
-  margin: 0 0 48px;
-}
-
-@media (max-width: 935px) {
-  .form__input:last-of-type {
-    margin: 0 0 45px;
-  }
+.form__input::placeholder {
+  color: #C4C4C4;
 }

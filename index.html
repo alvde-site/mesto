@@ -45,14 +45,20 @@
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <div class="popup popup_handle_profile">
+    <div class="popup popup_handle_profile" style="visibility: visible;opacity: 1;">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form action="#" name="profileform" class="form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
-          <input type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required minlength="2" maxlength="40">
-          <input type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required minlength="2" maxlength="200">
-          <button class="form__submit form__submit_edit-form" type="submit">Сохранить</button>
+          <label for="profilename" class="form__field">
+            <input id="profilename" type="text" class="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required minlength="2" maxlength="40">
+            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+          </label>
+          <label for="profilejob" class="form__field">
+            <input id="profilejob" type="text" class="form__input form__input_profile_job" name="profilejob" placeholder="Введите профессию" required minlength="2" maxlength="200">
+            <span class="form__input-error">Поле нужно обязательно заполнить</span>
+          </label>
+          <button class="form__submit form__submit_edit-form form__submit_disabled" type="submit">Сохранить</button>
         </form>
       </div>
     </div>

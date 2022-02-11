@@ -1,5 +1,3 @@
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 const enableValidation = (popup)=>{
 };
 enableValidation({
