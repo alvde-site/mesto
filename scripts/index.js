@@ -167,7 +167,7 @@ function setProfileText() {
 }
 
 function submitProfileForm(evt) {
-  formSubmitHandler(evt);
+  handleSubmitForm(evt);
   setProfileText();
 }
 
@@ -178,7 +178,7 @@ function submitCardForm(evt) {
   }
   const card = createCard(dataAddForm);
   renderElement(card, elements);
-  formSubmitHandler(evt);
+  handleSubmitForm(evt);
   popupAddFormElement.reset();
 }
 
@@ -194,7 +194,7 @@ function openPopupAddElementForm () {
 }
 
 // Обработчик «отправки» формы
-function formSubmitHandler (evt) {
+function handleSubmitForm (evt) {
     evt.preventDefault(); // отмена стандартной отправки формы.
     closePopup(evt);
 }
