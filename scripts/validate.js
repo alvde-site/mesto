@@ -1,7 +1,3 @@
-const formSubmit = (event) =>{
-  event.preventDefault();
-}
-
 const setInputValid = ({inputErrorClass}, errorMessage, input) => {
   input.classList.remove(inputErrorClass);
   errorMessage.textContent = '';
@@ -34,7 +30,6 @@ const checkButtonValidity = ({inactiveButtonClass}, form, button) => {
 const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ...rest})=> {
   const forms = document.querySelectorAll(formSelector);
   forms.forEach(form => {
-    form.addEventListener('submit', formSubmit);
     const inputs = form.querySelectorAll(inputSelector);
     const button = form.querySelector(submitButtonSelector);
     checkButtonValidity(rest, form, button);
