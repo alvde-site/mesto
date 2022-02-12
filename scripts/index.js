@@ -29,6 +29,8 @@ const elements = document.querySelector('.elements__container'); // Место �
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  closePopupByOverlayClick(popup);
+  closePopupByEscapeClick(popup);
 }
 
 // Закрыть popups
@@ -37,17 +39,22 @@ function closePopup (popup) {
   popup.target.closest('.popup').classList.remove('popup_opened');
 }
 
-const setEventListeners = () => {
-  popups.forEach((popup) => {
-    // каждому popup добавим обработчик события click
+const closePopupByOverlayClick = (popup) => {
     popup.addEventListener('click', (evt) => {
         if(evt.target.classList.contains('popup')){
           evt.target.classList.remove('popup_opened');
         }
     });
+};
+
+const closePopupByEscapeClick = (popup) => {
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape'){
+        popup.classList.remove('popup_opened');
+    }
   });
 };
-setEventListeners();
+
 //Добавление слушателей карточкам
 
 function addListenerToElement(like, remove, src) {
