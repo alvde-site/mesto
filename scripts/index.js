@@ -60,16 +60,24 @@ const addListenerByOverlayClick = (popup) => {
 
 };
 
-const closePopupByEscapeClick = (evt, popup) => {
-  if(evt.key === 'Escape'){
-    popup.classList.remove('popup_opened');
+const removeListenerByEscapeClick = () => {
+  document.removeEventListener('keydown', handleEscapeKey);
 }
+
+const handleEscapeKey = (evt) => {
+  if(evt.key === 'Escape'){
+    const openedPopup = document.querySelector('.popup_opened');
+    openedPopup.classList.remove('popup_opened');
+  }
+  removeListenerByEscapeClick();
+}
+
+const closePopupByEscapeClick = (evt, popup) => {
 };
 
+
 const addListenerByEscapeClick = (popup) => {
-  document.addEventListener('keydown', (evt) => {
-    closePopupByEscapeClick(evt, popup);
-  });
+  document.addEventListener('keydown', handleEscapeKey);
 };
 
 //Добавление слушателей карточкам
