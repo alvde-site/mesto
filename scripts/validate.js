@@ -33,17 +33,19 @@ const checkButtonValidity = (form, button) => {
 };
 
 const enableValidation = ()=> {
-  const form = document.querySelector('.form');
-  form.addEventListener('submit', formSubmit);
-  const inputs = form.querySelectorAll('.form__input');
-  const button = form.querySelector('.form__submit_edit-form');
-  checkButtonValidity(form, button);
-  inputs.forEach(input => {
-    input.addEventListener('input', ()=> {
-      checkInputValidity(form, input);
-      checkButtonValidity(form, button);
-    });
-  })
+  const forms = document.querySelectorAll('.form');
+  forms.forEach(form => {
+    form.addEventListener('submit', formSubmit);
+    const inputs = form.querySelectorAll('.form__input');
+    const button = form.querySelector('.form__submit');
+    checkButtonValidity(form, button);
+    inputs.forEach(input => {
+      input.addEventListener('input', ()=> {
+        checkInputValidity(form, input);
+        checkButtonValidity(form, button);
+      });
+    })
+  });
 };
 enableValidation(/*{
   formSelector: '.form',
