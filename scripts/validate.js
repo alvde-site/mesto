@@ -18,7 +18,6 @@ const checkInputValidity = (rest, form, input) => {
 }
 
 const checkButtonValidity = ({inactiveButtonClass}, form, button) => {
-  console.log(form.checkValidity());
   if(form.checkValidity()){
     button.classList.remove(inactiveButtonClass);
     button.removeAttribute('disabled');

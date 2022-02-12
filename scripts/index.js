@@ -29,8 +29,8 @@ const elements = document.querySelector('.elements__container'); // Место �
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  closePopupByOverlayClick(popup);
-  closePopupByEscapeClick(popup);
+  addListenerByOverlayClick(popup);
+  addListenerByEscapeClick(popup);
   enableValidation({
     formSelector: '.form',
     inputSelector: '.form__input',
@@ -48,11 +48,15 @@ function closePopup (popup) {
 }
 
 const closePopupByOverlayClick = (popup) => {
-    popup.addEventListener('click', (evt) => {
-        if(evt.target.classList.contains('popup')){
-          evt.target.classList.remove('popup_opened');
-        }
-    });
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup')){
+      evt.target.classList.remove('popup_opened');
+    }
+});
+}
+
+const addListenerByOverlayClick = (popup) => {
+  closePopupByOverlayClick(popup);
 };
 
 const closePopupByEscapeClick = (popup) => {
@@ -61,6 +65,10 @@ const closePopupByEscapeClick = (popup) => {
         popup.classList.remove('popup_opened');
     }
   });
+};
+
+const addListenerByEscapeClick = (popup) => {
+  closePopupByEscapeClick(popup);
 };
 
 //Добавление слушателей карточкам
