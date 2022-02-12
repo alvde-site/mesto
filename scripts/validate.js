@@ -2,57 +2,57 @@ const formSubmit = (event) =>{
   event.preventDefault();
 }
 
-const setInputValid = (errorMessage, input) => {
-  input.classList.remove('form__input_type_error');
+const setInputValid = ({inputErrorClass}, errorMessage, input) => {
+  input.classList.remove(inputErrorClass);
   errorMessage.textContent = '';
 }
 
-const setInputInvalid = (errorMessage, input) => {
-  input.classList.add('form__input_type_error');
+const setInputInvalid = ({inputErrorClass}, errorMessage, input) => {
+  input.classList.add(inputErrorClass);
   errorMessage.textContent = input.validationMessage;
 }
 
-const checkInputValidity = (form, input) => {
+const checkInputValidity = (rest, form, input) => {
   const errorMessage = form.querySelector(`#error-${input.id}`);
   if(input.validity.valid){
-    setInputValid(errorMessage, input);
+    setInputValid(rest, errorMessage, input);
   } else {
-   setInputInvalid(errorMessage, input);
+   setInputInvalid(rest, errorMessage, input);
   }
 }
 
-const checkButtonValidity = (form, button) => {
+const checkButtonValidity = ({inactiveButtonClass}, form, button) => {
+  console.log(inactiveButtonClass);
   if(form.checkValidity()){
-    button.classList.remove('form__submit_disabled');
+    button.classList.remove(inactiveButtonClass);
     button.removeAttribute('disabled','');
-    console.log(form.checkValidity());
   } else {
-    button.classList.add('form__submit_disabled');
+    button.classList.add(inactiveButtonClass);
     button.setAttribute('disabled','');
   }
 };
 
-const enableValidation = ()=> {
-  const forms = document.querySelectorAll('.form');
+const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ...rest})=> {
+  const forms = document.querySelectorAll(formSelector);
   forms.forEach(form => {
     form.addEventListener('submit', formSubmit);
-    const inputs = form.querySelectorAll('.form__input');
-    const button = form.querySelector('.form__submit');
-    checkButtonValidity(form, button);
+    const inputs = form.querySelectorAll(inputSelector);
+    const button = form.querySelector(submitButtonSelector);
+    checkButtonValidity(rest, form, button);
     inputs.forEach(input => {
       input.addEventListener('input', ()=> {
-        checkInputValidity(form, input);
-        checkButtonValidity(form, button);
+        checkInputValidity(rest, form, input);
+        checkButtonValidity(rest, form, button);
       });
     })
   });
 };
-enableValidation(/*{
+enableValidation({
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit',
   inactiveButtonClass: 'form__submit_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
-}*/);
+});
 
