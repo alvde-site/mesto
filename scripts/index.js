@@ -166,9 +166,9 @@ function submitCardForm(evt) {
 }
 
 function openPopupEditForm () {
-  openPopup(popupEditForm);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
