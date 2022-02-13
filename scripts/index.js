@@ -125,9 +125,14 @@ function removeElement(button){
 
 // Добавление слушателя закрытию карточки
 
+const getPopup = (evt) => {
+  const popup = evt.target.closest('.popup');
+  return popup;
+}
+
 function addListenterToCloseButton(button) {
   button.addEventListener('click', (evt) => {
-    const popup = evt.target.closest('.popup');
+    const popup = getPopup(evt);
     closePopup(popup);
   });
 }
@@ -158,8 +163,8 @@ function handleSubmitForm (evt, popup) {
 }
 
 function submitProfileForm(evt) {
-  //const form = evt.target;
-  const popup = evt.target.closest('.popup');
+  const popup = getPopup(evt);
+  closePopup(popup);
   handleSubmitForm(evt, popup);
   setProfileText();
 }
@@ -171,7 +176,8 @@ function submitCardForm(evt) {
   }
   const card = createCard(dataAddForm);
   renderElement(card, elements);
-  const popup = evt.target.closest('.popup');
+  const popup = getPopup(evt);
+  closePopup(popup);
   handleSubmitForm(evt, popup);
   popupAddFormElement.reset();
 }
