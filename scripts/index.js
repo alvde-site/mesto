@@ -2,19 +2,16 @@ const popups = Array.from(document.querySelectorAll('.popup'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
-const popupEditCloseButton = popupEditForm.querySelector('.popup__close');
 const popupEditFormElement = popupEditForm.querySelector('.form');
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const popupEditFormSubmit = popupEditForm.querySelector('.form__submit_edit-form');
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
-const popupAddCloseButton = popupAddForm.querySelector('.popup__close');
 const popupAddFormElement = popupAddForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
 const addElementLink = document.querySelector('.form__input_add_link');
 const popupAddFormSubmit = popupAddForm.querySelector('.form__submit_add-form');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
-const closeButton = popupImageViewing.querySelector('.image-viewing__close');
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 
@@ -42,9 +39,14 @@ function closePopup (popup) {
 }
 
 const addListenerByOverlayClick = () => {
-  popups.forEach( popup => {
+  popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
-      closePopup(evt.target);
+      if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup);
+      }
     });
   });
 };
@@ -127,12 +129,6 @@ function addListenterToCloseButton(button) {
   });
 }
 
-// Добавление слушателя закрытию popup
-
-addListenterToCloseButton(closeButton);
-addListenterToCloseButton(popupEditCloseButton);
-addListenterToCloseButton(popupAddCloseButton);
-
 // Просмотр изображения
 
 function viewImage(img) {
@@ -178,7 +174,6 @@ function openPopupEditForm (rest, form, button) {
 function openPopupAddElementForm (rest, form, button) {
   checkButtonValidity(rest, form, button);
   openPopup(popupAddForm);
-  addListenterToCloseButton(closeButton);
 }
 
 // Обработчик «отправки» формы
