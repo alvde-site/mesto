@@ -150,8 +150,16 @@ function setProfileText() {
   profileJob.textContent = jobInput.value;
 }
 
+// Обработчик «отправки» формы
+function handleSubmitForm (evt, popup) {
+  evt.preventDefault(); // отмена стандартной отправки формы.
+  closePopup(popup);
+}
+
 function submitProfileForm(evt) {
-  handleSubmitForm(evt);
+  //const form = evt.target;
+  const popup = evt.target.closest('.popup');
+  handleSubmitForm(evt, popup);
   setProfileText();
 }
 
@@ -176,12 +184,6 @@ function openPopupEditForm (rest, form, button) {
 function openPopupAddElementForm (rest, form, button) {
   checkButtonValidity(rest, form, button);
   openPopup(popupAddForm);
-}
-
-// Обработчик «отправки» формы
-function handleSubmitForm (evt) {
-    evt.preventDefault(); // отмена стандартной отправки формы.
-    closePopup(evt);
 }
 
 const addListenerToOpenPopupButton = (rest, form, button) => {
