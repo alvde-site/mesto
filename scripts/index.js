@@ -38,7 +38,7 @@ function closePopup (popup) {
   removeListenerByEscapeClick();
 }
 
-const addListenerByOverlayClick = () => {
+const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup_opened')) {
@@ -51,7 +51,7 @@ const addListenerByOverlayClick = () => {
   });
 };
 
-addListenerByOverlayClick();
+addListenersToClosePopups();
 
 const handleEscapeKey = (evt) => {
   if(evt.key === 'Escape'){
