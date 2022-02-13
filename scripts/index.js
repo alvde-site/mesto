@@ -22,6 +22,10 @@ const elements = document.querySelector('.elements__container'); // Место �
 
 // Открыть popup
 
+const addListenerByEscapeClick = () => {
+  document.addEventListener('keydown', handleEscapeKey);
+};
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   addListenerByEscapeClick();
@@ -63,16 +67,16 @@ const handleEscapeKey = (evt) => {
   }
 }
 
-const addListenerByEscapeClick = () => {
-  document.addEventListener('keydown', handleEscapeKey);
-};
-
 //Добавление слушателей карточкам
 
 function addListenerToElement(like, remove, src) {
   like.addEventListener('click', addLikeToButton);
   remove.addEventListener('click', removeElement);
   src.addEventListener('click', viewImage);
+}
+
+const renderElement = (card, wrap) => {
+  wrap.prepend(card);
 }
 
 function render () {
@@ -90,9 +94,6 @@ function addCardContent(name, link, formData) {
   link.alt = formData.name; // Настройка alt изображения
 }
 
-const renderElement = (card, wrap) => {
-  wrap.prepend(card);
-}
 
 // Создание новой карточки
 
@@ -170,7 +171,8 @@ function submitCardForm(evt) {
   }
   const card = createCard(dataAddForm);
   renderElement(card, elements);
-  handleSubmitForm(evt);
+  const popup = evt.target.closest('.popup');
+  handleSubmitForm(evt, popup);
   popupAddFormElement.reset();
 }
 
