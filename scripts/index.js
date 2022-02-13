@@ -32,8 +32,13 @@ function openPopup(popup) {
 
 // Закрыть popups
 
+const removeListenerByEscapeClick = () => {
+  document.removeEventListener('keydown', handleEscapeKey);
+}
+
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  removeListenerByEscapeClick();
 }
 
 const addListenerByOverlayClick = () => {
@@ -46,21 +51,13 @@ const addListenerByOverlayClick = () => {
 
 addListenerByOverlayClick();
 
-const removeListenerByEscapeClick = () => {
-  document.removeEventListener('keydown', handleEscapeKey);
-}
-
 const handleEscapeKey = (evt) => {
   if(evt.key === 'Escape'){
     const openedPopup = document.querySelector('.popup_opened');
-    openedPopup.classList.remove('popup_opened');
+    closePopup(openedPopup);
+    //openedPopup.classList.remove('popup_opened');
   }
-  removeListenerByEscapeClick();
 }
-
-const closePopupByEscapeClick = (evt, popup) => {
-};
-
 
 const addListenerByEscapeClick = (popup) => {
   document.addEventListener('keydown', handleEscapeKey);
