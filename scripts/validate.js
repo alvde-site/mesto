@@ -33,6 +33,7 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ..
     const inputs = form.querySelectorAll(inputSelector);
     const button = form.querySelector(submitButtonSelector);
     checkButtonValidity(rest, form, button);
+    addListenerToOpenPopupButton(rest, form, button);
     inputs.forEach(input => {
       input.addEventListener('input', ()=> {
         checkInputValidity(rest, form, input);

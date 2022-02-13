@@ -1,14 +1,12 @@
 const popups = Array.from(document.querySelectorAll('.popup'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
-const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
 const popupEditCloseButton = popupEditForm.querySelector('.popup__close');
 const popupEditFormElement = popupEditForm.querySelector('.form');
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const popupEditFormSubmit = popupEditForm.querySelector('.form__submit_edit-form');
-const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
 const popupAddCloseButton = popupAddForm.querySelector('.popup__close');
 const popupAddFormElement = popupAddForm.querySelector('.form');
@@ -182,13 +180,15 @@ function submitCardForm(evt) {
   popupAddFormElement.reset();
 }
 
-function openPopupEditForm () {
+function openPopupEditForm (rest, form, button) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  checkButtonValidity(rest, form, button);
   openPopup(popupEditForm);
 }
 
-function openPopupAddElementForm () {
+function openPopupAddElementForm (rest, form, button) {
+  checkButtonValidity(rest, form, button);
   openPopup(popupAddForm);
   addListenterToCloseButton(closeButton);
 }
@@ -199,7 +199,12 @@ function handleSubmitForm (evt) {
     closePopup(evt);
 }
 
-editButton.addEventListener('click', openPopupEditForm);
-addButton.addEventListener('click', openPopupAddElementForm);
+const addListenerToOpenPopupButton = (rest, form, button) => {
+  const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
+  const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
+  editButton.addEventListener('click', () => { openPopupEditForm(rest,form, button) });
+  addButton.addEventListener('click', () => { openPopupAddElementForm(rest,form, button) });
+}
+
 popupEditForm.addEventListener('submit', submitProfileForm);
 popupAddForm.addEventListener('submit', submitCardForm);
