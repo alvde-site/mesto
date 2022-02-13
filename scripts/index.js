@@ -24,7 +24,7 @@ const elements = document.querySelector('.elements__container'); // Место �
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  addListenerByEscapeClick(popup);
+  addListenerByEscapeClick();
 }
 
 // Закрыть popups
@@ -41,9 +41,11 @@ function closePopup (popup) {
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
+      // Закрытие по нажатию на overlay
       if (evt.target.classList.contains('popup_opened')) {
         closePopup(popup);
       }
+      // Закрытие по нажатию на крестик
       if (evt.target.classList.contains('popup__close')) {
         closePopup(popup);
       }
@@ -61,7 +63,7 @@ const handleEscapeKey = (evt) => {
   }
 }
 
-const addListenerByEscapeClick = (popup) => {
+const addListenerByEscapeClick = () => {
   document.addEventListener('keydown', handleEscapeKey);
 };
 
