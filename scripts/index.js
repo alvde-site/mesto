@@ -202,12 +202,23 @@ const addListenerToOpenPopupButton = (rest, form, button) => {
 popupEditForm.addEventListener('submit', submitProfileForm);
 popupAddForm.addEventListener('submit', submitCardForm);
 */
+
+
+
+//Код для файла index.js
+
+const popups = Array.from(document.querySelectorAll('.popup'));
+
+
+
+
+//Код для файла Card.js
 const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 
 class Card {
-  constructor(name, link) {
-    this._name = name;
-    this._link = link;
+  constructor(data) {
+    this._name = data.name;
+    this._link = data.link;
   }
 
   _getTemplate() {
@@ -221,16 +232,26 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
+    this._setEventListeners();
     this._element.querySelector('.element__description-text').innerText = this._name;
     this._element.querySelector('.element__img').src = this._link;
     this._element.querySelector('.element__img').alt = this._name;
     return this._element;
   }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__like-button').addEventListener('click', (button) => {
+     this._addLikeToButton(button);
+    });
+  }
+
+  _addLikeToButton(button) {
+    button.target.classList.toggle('element__like-button_active');
+  }
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link);
+  const card = new Card(item);
   const cardElement = card.generateCard();
   elements.prepend(cardElement);
 });
