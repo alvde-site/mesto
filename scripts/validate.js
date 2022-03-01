@@ -1,4 +1,4 @@
-const setInputValid = ({inputErrorClass}, errorMessage, input) => {
+/*const setInputValid = ({inputErrorClass}, errorMessage, input) => {
   input.classList.remove(inputErrorClass);
   errorMessage.textContent = '';
 }
@@ -50,4 +50,4 @@ enableValidation({
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
 });
-
+*/

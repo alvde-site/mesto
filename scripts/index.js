@@ -1,4 +1,4 @@
-const popups = Array.from(document.querySelectorAll('.popup'));
+/*const popups = Array.from(document.querySelectorAll('.popup'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
@@ -201,3 +201,36 @@ const addListenerToOpenPopupButton = (rest, form, button) => {
 
 popupEditForm.addEventListener('submit', submitProfileForm);
 popupAddForm.addEventListener('submit', submitCardForm);
+*/
+const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
+
+class Card {
+  constructor(name, link) {
+    this._name = name;
+    this._link = link;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+    .querySelector('#element_template')
+    .content
+    .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+
+    this._element.querySelector('.element__description-text').innerText = this._name;
+    this._element.querySelector('.element__img').src = this._link;
+    this._element.querySelector('.element__img').alt = this._name;
+    return this._element;
+  }
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link);
+  const cardElement = card.generateCard();
+  elements.prepend(cardElement);
+});
