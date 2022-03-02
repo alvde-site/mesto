@@ -83,11 +83,23 @@ class FormValidator {
   }
 
   _checkButtonValidity() {
-
   }
 
   enableValidation() {
-    enableValidation(this);
+    const forms = document.querySelectorAll(this.formSelector);
+    forms.forEach(form => {
+      const inputs = form.querySelectorAll(this.inputSelector);
+      const button = form.querySelector(this.submitButtonSelector);
+      //checkButtonValidity(rest, form, button);
+      //(fix: Убрать установку двуч слушателей на кнопку открытия editProfile);
+      addListenerToOpenPopupButton(this, form, button);
+      //inputs.forEach(input => {
+        //input.addEventListener('input', ()=> {
+          //checkInputValidity(rest, form, input);
+          //checkButtonValidity(rest, form, button);
+        //});
+      //})
+    });
   }
 
 }
