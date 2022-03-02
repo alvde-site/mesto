@@ -224,12 +224,13 @@ const popupCaption = document.querySelector('.image-viewing__caption');
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  const formValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
   formValidator.enableValidation();
   openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
-  formValidator.enableValidation();
+  const formValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
   openPopup(popupAddForm);
 }
 

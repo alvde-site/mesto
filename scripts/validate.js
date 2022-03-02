@@ -108,14 +108,17 @@ class FormValidator {
     errorMessage.textContent = input.validationMessage;
   }
 }
-
-const formValidator = new FormValidator({
+const formData = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit',
   inactiveButtonClass: 'form__submit_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
-}, popupAddForm.querySelector('.form'));
+}
 
-formValidator.enableValidation();
+const forms = document.querySelectorAll('.form');
+forms.forEach((item) => {
+  const formValidator = new FormValidator(formData, item);
+  formValidator.enableValidation();
+})
