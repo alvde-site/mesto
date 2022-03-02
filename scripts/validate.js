@@ -54,22 +54,6 @@ enableValidation({
 
 //код для файла formValidator.js
 
-const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ...rest})=> {
-  const forms = document.querySelectorAll(formSelector);
-  forms.forEach(form => {
-    const inputs = form.querySelectorAll(inputSelector);
-    const button = form.querySelector(submitButtonSelector);
-    //checkButtonValidity(rest, form, button);
-    //(fix: Убрать установку двуч слушателей на кнопку открытия editProfile);
-    addListenerToOpenPopupButton(rest, form, button);
-    //inputs.forEach(input => {
-      //input.addEventListener('input', ()=> {
-        //checkInputValidity(rest, form, input);
-        //checkButtonValidity(rest, form, button);
-      //});
-    //})
-  });
-};
 
 class FormValidator {
   constructor(data, form) {
@@ -82,26 +66,48 @@ class FormValidator {
     this.form = form;
   }
 
-  _checkButtonValidity() {
-  }
-
   enableValidation() {
-    const forms = document.querySelectorAll(this.formSelector);
-    forms.forEach(form => {
-      const inputs = form.querySelectorAll(this.inputSelector);
-      const button = form.querySelector(this.submitButtonSelector);
-      //checkButtonValidity(rest, form, button);
-      //(fix: Убрать установку двуч слушателей на кнопку открытия editProfile);
-      addListenerToOpenPopupButton(this, form, button);
-      //inputs.forEach(input => {
-        //input.addEventListener('input', ()=> {
-          //checkInputValidity(rest, form, input);
-          //checkButtonValidity(rest, form, button);
-        //});
-      //})
-    });
+    const inputs = this.form.querySelectorAll(this.inputSelector);
+    const button = this.form.querySelector(this.submitButtonSelector);
+    this._checkButtonValidity();
+    inputs.forEach(input => {
+      input.addEventListener('input', (input)=> {
+        this._checkInputValidity(input.target);
+        this._checkButtonValidity();
+      });
+    })
   }
 
+  _checkButtonValidity() {
+    const button = this.form.querySelector(this.submitButtonSelector);
+    if(this.form.checkValidity()){
+      button.classList.remove(this.inactiveButtonClass);
+      button.removeAttribute('disabled');
+    } else {
+      console.log('не валидировалось')
+      button.classList.add(this.inactiveButtonClass);
+      button.setAttribute('disabled','');
+    }
+  }
+
+  _checkInputValidity(input) {
+    const errorMessage = this.form.querySelector(`#error-${input.id}`);
+    if(input.validity.valid){
+   this._setInputValid(errorMessage, input);
+    } else {
+   this._setInputInvalid(errorMessage, input);
+    }
+  }
+
+  _setInputValid(errorMessage, input) {
+    input.classList.remove(this.inputErrorClass);
+    errorMessage.textContent = '';
+  }
+
+  _setInputInvalid = (errorMessage, input) => {
+    input.classList.add(this.inputErrorClass);
+    errorMessage.textContent = input.validationMessage;
+  }
 }
 
 const formValidator = new FormValidator({
@@ -111,6 +117,6 @@ const formValidator = new FormValidator({
   inactiveButtonClass: 'form__submit_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
-});
+}, popupEditForm.querySelector('.form'));
 
 formValidator.enableValidation();

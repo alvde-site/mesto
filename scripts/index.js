@@ -228,15 +228,17 @@ function openPopupEditForm (rest, form, button) {
   openPopup(popupEditForm);
 }
 
-function openPopupAddElementForm (rest, form, button) {
+function openPopupAddElementForm (/*rest, form, button*/) {
   //checkButtonValidity(rest, form, button);
   openPopup(popupAddForm);
 }
 
-const addListenerToOpenPopupButton = (rest, form, button) => {
-  editButton.addEventListener('click', () => { openPopupEditForm(rest,form, button); console.log("Убрать лишний Слушатель для editform")});
-  addButton.addEventListener('click', () => { openPopupAddElementForm(rest,form, button); console.log("Убрать лишний Слушатель для addform") });
+const addListenerToOpenPopupButton = (/*rest, form, button*/) => {
+  editButton.addEventListener('click', () => { openPopupEditForm(/*rest,form, button*/); console.log("Убрать лишний Слушатель для editform")});
+  addButton.addEventListener('click', () => { openPopupAddElementForm(/*rest,form, button*/); console.log("Убрать лишний Слушатель для addform") });
 }
+
+addListenerToOpenPopupButton();
 
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
