@@ -29,6 +29,7 @@ function openPopupEditForm () {
 
 function openPopupAddElementForm () {
   const formValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
+  formValidator.enableValidation();
   openPopup(popupAddForm);
 }
 
