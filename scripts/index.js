@@ -208,12 +208,47 @@ popupAddForm.addEventListener('submit', submitCardForm);
 //Код для файла index.js
 
 const popups = Array.from(document.querySelectorAll('.popup'));
+const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
+const popupImage = document.querySelector('.image-viewing__image');
+const popupCaption = document.querySelector('.image-viewing__caption');
+const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 
+const removeListenerByEscapeClick = () => {
+  document.removeEventListener('keydown', handleEscapeKey);
+}
 
+function closePopup (popup) {
+  popup.classList.remove('popup_opened');
+  removeListenerByEscapeClick();
+}
 
+const handleEscapeKey = (evt) => {
+  if(evt.key === 'Escape'){
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
+const addListenerByEscapeClick = () => {
+  document.addEventListener('keydown', handleEscapeKey);
+};
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  addListenerByEscapeClick();
+}
+
+function viewImage(img) {
+  const imageSrc = img.target.getAttribute('src');
+  const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
+
+  popupImage.setAttribute('src', imageSrc); //Настройка src фото
+  popupImage.setAttribute('alt', imageCaption); // Настройка alt фото
+  popupCaption.innerText = imageCaption; // Настройка заголовка фото
+  openPopup(popupImageViewing);
+}
 
 //Код для файла Card.js
-const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 
 class Card {
   constructor(data) {
@@ -234,6 +269,7 @@ class Card {
     this._element = this._getTemplate();
     this._addLikeToButton();
     this._removeElement();
+    this._imageViewing();
     this._element.querySelector('.element__description-text').innerText = this._name;
     this._element.querySelector('.element__img').src = this._link;
     this._element.querySelector('.element__img').alt = this._name;
@@ -250,6 +286,10 @@ class Card {
     this._element.querySelector('.element__remove-button').addEventListener('click', (button) => {
       button.target.closest('.element').remove();
     });
+  }
+
+  _imageViewing() {
+    this._element.querySelector('.element__img').addEventListener('click', (img) => viewImage(img));
   }
 }
 
