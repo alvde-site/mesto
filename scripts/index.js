@@ -207,11 +207,31 @@ popupAddForm.addEventListener('submit', submitCardForm);
 
 //Код для файла index.js
 
+const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
+const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 const popups = Array.from(document.querySelectorAll('.popup'));
+const profileName = document.querySelector('.profile__name'); // Имя профиля
+const profileJob = document.querySelector('.profile__job');  // Профессия профиля
+const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
+const nameInput = document.querySelector('.form__input_profile_name');
+const jobInput = document.querySelector('.form__input_profile_job');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
-const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
+
+function openPopupEditForm (rest, form, button) {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  //checkButtonValidity(rest, form, button);
+  openPopup(popupEditForm);
+}
+
+const addListenerToOpenPopupButton = (rest, form, button) => {
+  //const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
+  editButton.addEventListener('click', () => { openPopupEditForm(rest,form, button);
+    console.log('два открытия editProfile, нужно исправить') });
+  //addButton.addEventListener('click', () => { openPopupAddElementForm(rest,form, button) });
+}
 
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {

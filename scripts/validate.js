@@ -51,3 +51,41 @@ enableValidation({
   errorClass: 'popup__input-error_active'
 });
 */
+
+//код для файла formValidator.js
+
+class formValidator {
+  constructor() {
+
+  }
+  enableValidation() {
+  }
+}
+
+const form = new formValidator();
+
+const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ...rest})=> {
+  const forms = document.querySelectorAll(formSelector);
+  forms.forEach(form => {
+    const inputs = form.querySelectorAll(inputSelector);
+    const button = form.querySelector(submitButtonSelector);
+    //checkButtonValidity(rest, form, button);
+    //(fix: Убрать установку двуч слушателей на кнопку открытия editProfile);
+    addListenerToOpenPopupButton(rest, form, button);
+    //inputs.forEach(input => {
+      //input.addEventListener('input', ()=> {
+        //checkInputValidity(rest, form, input);
+        //checkButtonValidity(rest, form, button);
+      //});
+    //})
+  });
+};
+
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'popup__input-error_active'
+});
