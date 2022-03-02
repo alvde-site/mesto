@@ -213,6 +213,23 @@ const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 
+const addListenersToClosePopups = () => {
+  popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+      // Закрытие по нажатию на overlay
+      if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+      }
+      // Закрытие по нажатию на крестик
+      if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup);
+      }
+    });
+  });
+};
+
+addListenersToClosePopups();
+
 const removeListenerByEscapeClick = () => {
   document.removeEventListener('keydown', handleEscapeKey);
 }
