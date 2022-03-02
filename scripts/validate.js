@@ -81,6 +81,11 @@ class FormValidator {
     this.errorClass = data.errorClass;
     this.form = form;
   }
+
+  _checkButtonValidity() {
+
+  }
+
   enableValidation() {
     enableValidation(this);
   }
