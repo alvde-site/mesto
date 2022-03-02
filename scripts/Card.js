@@ -1,3 +1,5 @@
+import { viewImage } from './index.js';
+
 export default class Card {
   constructor(data) {
     this._name = data.name;

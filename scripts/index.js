@@ -119,7 +119,7 @@ function openPopup(popup) {
   addListenerByEscapeClick();
 }
 
-function viewImage(img) {
+export function viewImage(img) {
   const imageSrc = img.target.getAttribute('src');
   const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
 
@@ -128,8 +128,6 @@ function viewImage(img) {
   popupCaption.innerText = imageCaption; // Настройка заголовка фото
   openPopup(popupImageViewing);
 }
-
-//Код для файла Card.js
 
 initialCards.forEach((item) => {
   const card = new Card(item);
