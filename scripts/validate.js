@@ -54,16 +54,6 @@ enableValidation({
 
 //код для файла formValidator.js
 
-class formValidator {
-  constructor() {
-
-  }
-  enableValidation() {
-  }
-}
-
-const form = new formValidator();
-
 const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ...rest})=> {
   const forms = document.querySelectorAll(formSelector);
   forms.forEach(form => {
@@ -81,7 +71,23 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ..
   });
 };
 
-enableValidation({
+class FormValidator {
+  constructor(data, form) {
+    this.formSelector = data.formSelector;
+    this.inputSelector = data.inputSelector;
+    this.submitButtonSelector = data.submitButtonSelector;
+    this.inactiveButtonClass = data.inactiveButtonClass;
+    this.inputErrorClass = data.inputErrorClass;
+    this.errorClass = data.errorClass;
+    this.form = form;
+  }
+  enableValidation() {
+    enableValidation(this);
+  }
+
+}
+
+const formValidator = new FormValidator({
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit',
@@ -89,3 +95,5 @@ enableValidation({
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
 });
+
+formValidator.enableValidation();
