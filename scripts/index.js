@@ -232,21 +232,24 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
+    this._addLikeToButton();
+    this._removeElement();
     this._element.querySelector('.element__description-text').innerText = this._name;
     this._element.querySelector('.element__img').src = this._link;
     this._element.querySelector('.element__img').alt = this._name;
     return this._element;
   }
 
-  _setEventListeners() {
+  _addLikeToButton() {
     this._element.querySelector('.element__like-button').addEventListener('click', (button) => {
-     this._addLikeToButton(button);
+      button.target.classList.toggle('element__like-button_active');
     });
   }
 
-  _addLikeToButton(button) {
-    button.target.classList.toggle('element__like-button_active');
+  _removeElement() {
+    this._element.querySelector('.element__remove-button').addEventListener('click', (button) => {
+      button.target.closest('.element').remove();
+    });
   }
 }
 
