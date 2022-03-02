@@ -262,9 +262,46 @@ const removeListenerByEscapeClick = () => {
   document.removeEventListener('keydown', handleEscapeKey);
 }
 
+function setProfileText() {
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+}
+
+// Обработчик «отправки» формы
+function handleSubmitForm (evt, popup) {
+  evt.preventDefault(); // отмена стандартной отправки формы.
+  closePopup(popup);
+}
+
+const getPopup = (evt) => {
+  const popup = evt.target.closest('.popup');
+  return popup;
+}
+
+
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   removeListenerByEscapeClick();
+}
+
+function submitProfileForm(evt) {
+  const popup = getPopup(evt);
+  closePopup(popup);
+  handleSubmitForm(evt, popup);
+  setProfileText();
+}
+
+function submitCardForm(evt) {
+  const dataAddForm = {
+    name: addElementName.value,
+    link: addElementLink.value
+  }
+  //const card = createCard(dataAddForm);
+  //renderElement(card, elements);
+  const popup = getPopup(evt);
+  closePopup(popup);
+  handleSubmitForm(evt, popup);
+  popupAddFormElement.reset();
 }
 
 const handleEscapeKey = (evt) => {
@@ -343,3 +380,6 @@ initialCards.forEach((item) => {
   const cardElement = card.generateCard();
   elements.prepend(cardElement);
 });
+
+popupEditForm.addEventListener('submit', submitProfileForm);
+popupAddForm.addEventListener('submit', submitCardForm);
