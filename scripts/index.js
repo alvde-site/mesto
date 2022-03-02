@@ -215,6 +215,9 @@ const profileName = document.querySelector('.profile__name'); // Имя проф
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
+const popupAddFormElement = popupAddForm.querySelector('.form');
+const addElementName = document.querySelector('.form__input_add_name');
+const addElementLink = document.querySelector('.form__input_add_link');
 const nameInput = document.querySelector('.form__input_profile_name');
 const jobInput = document.querySelector('.form__input_profile_job');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
@@ -296,6 +299,9 @@ function submitCardForm(evt) {
     name: addElementName.value,
     link: addElementLink.value
   }
+  const card = new Card(dataAddForm);
+  const cardElement = card.generateCard();
+  elements.prepend(cardElement);
   //const card = createCard(dataAddForm);
   //renderElement(card, elements);
   const popup = getPopup(evt);
