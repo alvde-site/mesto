@@ -221,21 +221,21 @@ const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 
-function openPopupEditForm (rest, form, button) {
+function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  //checkButtonValidity(rest, form, button);
+  formValidator.enableValidation();
   openPopup(popupEditForm);
 }
 
-function openPopupAddElementForm (/*rest, form, button*/) {
-  //checkButtonValidity(rest, form, button);
+function openPopupAddElementForm () {
+  formValidator.enableValidation();
   openPopup(popupAddForm);
 }
 
-const addListenerToOpenPopupButton = (/*rest, form, button*/) => {
-  editButton.addEventListener('click', () => { openPopupEditForm(/*rest,form, button*/); console.log("Убрать лишний Слушатель для editform")});
-  addButton.addEventListener('click', () => { openPopupAddElementForm(/*rest,form, button*/); console.log("Убрать лишний Слушатель для addform") });
+const addListenerToOpenPopupButton = () => {
+  editButton.addEventListener('click', () => { openPopupEditForm()});
+  addButton.addEventListener('click', () => { openPopupAddElementForm()});
 }
 
 addListenerToOpenPopupButton();

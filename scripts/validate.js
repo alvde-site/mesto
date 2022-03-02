@@ -84,7 +84,6 @@ class FormValidator {
       button.classList.remove(this.inactiveButtonClass);
       button.removeAttribute('disabled');
     } else {
-      console.log('не валидировалось')
       button.classList.add(this.inactiveButtonClass);
       button.setAttribute('disabled','');
     }
@@ -117,6 +116,6 @@ const formValidator = new FormValidator({
   inactiveButtonClass: 'form__submit_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_active'
-}, popupEditForm.querySelector('.form'));
+}, popupAddForm.querySelector('.form'));
 
 formValidator.enableValidation();
