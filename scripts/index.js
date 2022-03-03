@@ -2,6 +2,13 @@ import { initialCards } from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
+class EditFormValidator {
+
+}
+class AddFormValidator {
+
+}
+
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
@@ -18,6 +25,20 @@ const jobInput = document.querySelector('.form__input_profile_job');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
+const template = document.querySelector('#element_template');
+
+const createCard = (item) => {
+  const newElement = new Card(item);
+  return newElement;
+}
+
+const renderElement = (card, position) => {
+  if (position === 'start') {
+    elements.append(card);
+  } else {
+    elements.prepend(card);
+  }
+}
 
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
@@ -95,9 +116,9 @@ function submitCardForm(evt) {
     name: addElementName.value,
     link: addElementLink.value
   }
-  const card = new Card(dataAddForm);
+  const card = createCard(dataAddForm);
   const cardElement = card.generateCard();
-  elements.prepend(cardElement);
+  renderElement(cardElement, 'end');
   const popup = getPopup(evt);
   closePopup(popup);
   handleSubmitForm(evt, popup);
@@ -133,7 +154,7 @@ export function viewImage(img) {
 initialCards.forEach((item) => {
   const card = new Card(item);
   const cardElement = card.generateCard();
-  elements.prepend(cardElement);
+  renderElement(cardElement, 'start');
 });
 
 popupEditForm.addEventListener('submit', submitProfileForm);
