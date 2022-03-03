@@ -28,8 +28,9 @@ const popupCaption = document.querySelector('.image-viewing__caption');
 const template = document.querySelector('#element_template');
 
 const createCard = (item) => {
-  const newElement = new Card(item);
-  return newElement;
+  const card = new Card(item);
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
 const renderElement = (card, position) => {
@@ -116,9 +117,8 @@ function submitCardForm(evt) {
     name: addElementName.value,
     link: addElementLink.value
   }
-  const card = createCard(dataAddForm);
-  const cardElement = card.generateCard();
-  renderElement(cardElement, 'end');
+  const newCard = createCard(dataAddForm);
+  renderElement(newCard, 'end');
   const popup = getPopup(evt);
   closePopup(popup);
   handleSubmitForm(evt, popup);
@@ -152,9 +152,8 @@ export function viewImage(img) {
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-  renderElement(cardElement, 'start');
+  const newCard = createCard(item);
+  renderElement(newCard, 'start');
 });
 
 popupEditForm.addEventListener('submit', submitProfileForm);
