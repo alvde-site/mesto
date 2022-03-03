@@ -18,13 +18,17 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._addLikeToButton();
-    this._removeElement();
-    this._imageViewing();
+    this._setEventListenter();
     this._element.querySelector('.element__description-text').innerText = this._name;
     this._element.querySelector('.element__img').src = this._link;
     this._element.querySelector('.element__img').alt = this._name;
     return this._element;
+  }
+
+  _setEventListenter() {
+    this._addLikeToButton();
+    this._removeElement();
+    this._imageViewing();
   }
 
   _addLikeToButton() {
