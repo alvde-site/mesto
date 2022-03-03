@@ -1,17 +1,15 @@
 export default class FormValidator {
   constructor(data, form) {
-    this.formSelector = data.formSelector;
-    this.inputSelector = data.inputSelector;
-    this.submitButtonSelector = data.submitButtonSelector;
-    this.inactiveButtonClass = data.inactiveButtonClass;
-    this.inputErrorClass = data.inputErrorClass;
-    this.errorClass = data.errorClass;
-    this.form = form;
+    this._inputSelector = data.inputSelector;
+    this._submitButtonSelector = data.submitButtonSelector;
+    this._inactiveButtonClass = data.inactiveButtonClass;
+    this._inputErrorClass = data.inputErrorClass;
+    this._form = form;
   }
 
   enableValidation() {
-    const inputs = this.form.querySelectorAll(this.inputSelector);
-    const button = this.form.querySelector(this.submitButtonSelector);
+    const inputs = this._form.querySelectorAll(this._inputSelector);
+    const button = this._form.querySelector(this._submitButtonSelector);
     this._checkButtonValidity();
     inputs.forEach(input => {
       input.addEventListener('input', (input)=> {
@@ -22,18 +20,18 @@ export default class FormValidator {
   }
 
   _checkButtonValidity() {
-    const button = this.form.querySelector(this.submitButtonSelector);
-    if(this.form.checkValidity()){
-      button.classList.remove(this.inactiveButtonClass);
+    const button = this._form.querySelector(this._submitButtonSelector);
+    if(this._form.checkValidity()){
+      button.classList.remove(this._inactiveButtonClass);
       button.removeAttribute('disabled');
     } else {
-      button.classList.add(this.inactiveButtonClass);
+      button.classList.add(this._inactiveButtonClass);
       button.setAttribute('disabled','');
     }
   }
 
   _checkInputValidity(input) {
-    const errorMessage = this.form.querySelector(`#error-${input.id}`);
+    const errorMessage = this._form.querySelector(`#error-${input.id}`);
     if(input.validity.valid){
    this._setInputValid(errorMessage, input);
     } else {
@@ -42,12 +40,12 @@ export default class FormValidator {
   }
 
   _setInputValid(errorMessage, input) {
-    input.classList.remove(this.inputErrorClass);
+    input.classList.remove(this._inputErrorClass);
     errorMessage.textContent = '';
   }
 
   _setInputInvalid = (errorMessage, input) => {
-    input.classList.add(this.inputErrorClass);
+    input.classList.add(this._inputErrorClass);
     errorMessage.textContent = input.validationMessage;
   }
 }
