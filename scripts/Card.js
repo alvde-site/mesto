@@ -4,11 +4,12 @@ export default class Card {
   constructor(data) {
     this._name = data.name;
     this._link = data.link;
+    this._template = '#element_template';
   }
 
   _getTemplate() {
     const cardElement = document
-    .querySelector('#element_template')
+    .querySelector(this._template)
     .content
     .cloneNode(true);
 
