@@ -13,6 +13,7 @@ const editButton = document.querySelector('.profile__edit-button'); // Кноп�
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 const popups = Array.from(document.querySelectorAll('.popup'));
+const forms = Array.from(document.querySelectorAll('.form'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
@@ -168,7 +169,6 @@ const formData = {
   errorClass: 'popup__input-error_active'
 }
 
-const forms = document.querySelectorAll('.form');
 forms.forEach((item) => {
   const formValidator = new FormValidator(formData, item);
   formValidator.enableValidation();
