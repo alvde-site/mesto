@@ -22,7 +22,8 @@ export default class FormValidator {
   resetValidation() {
     this._checkButtonValidity();
     this._inputList.forEach((input) => {
-      this._checkInputValidity(input);
+      const errorMessage = this._form.querySelector(`#error-${input.id}`);
+      this._setInputValid(errorMessage, input);
     });
   }
 
