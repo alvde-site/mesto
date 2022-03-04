@@ -60,6 +60,15 @@ const renderElement = (card, position) => {
   }
 }
 
+const addListenerByEscapeClick = () => {
+  document.addEventListener('keydown', handleEscapeKey);
+};
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  addListenerByEscapeClick();
+}
+
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -147,15 +156,6 @@ const handleEscapeKey = (evt) => {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
-
-const addListenerByEscapeClick = () => {
-  document.addEventListener('keydown', handleEscapeKey);
-};
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  addListenerByEscapeClick();
 }
 
 export function viewImage(img) {
