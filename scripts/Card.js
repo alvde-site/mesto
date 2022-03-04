@@ -1,10 +1,11 @@
-import { viewImage } from './index.js';
+import { handleCardClick } from './index.js';
 
 export default class Card {
-  constructor(data) {
+  constructor(data, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._template = '#element_template';
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -50,6 +51,8 @@ export default class Card {
   }
 
   _imageViewing() {
-    this._cardImage.addEventListener('click', (img) => viewImage(img));
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 }

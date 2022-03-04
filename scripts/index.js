@@ -47,7 +47,7 @@ const enableValidation = (config) => {
 enableValidation(formData);
 
 const createCard = (item) => {
-  const card = new Card(item);
+  const card = new Card(item, handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -60,13 +60,24 @@ const renderElement = (card, position) => {
   }
 }
 
+
+//Закрыть popup по нажатию на esc
 const addListenerByEscapeClick = () => {
   document.addEventListener('keydown', handleEscapeKey);
 };
 
+//Открыть popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   addListenerByEscapeClick();
+}
+
+//Обработчик закрыти просмотра изображения по esc
+export const handleCardClick = (name, link) => {
+  popupImage.setAttribute('src', link); //Настройка src фото
+  popupImage.setAttribute('alt', name); // Настройка alt фото
+  popupCaption.innerText = name; // Настройка заголовка фото
+  openPopup(popupImageViewing);
 }
 
 function openPopupEditForm () {
@@ -156,16 +167,6 @@ const handleEscapeKey = (evt) => {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
-
-export function viewImage(img) {
-  const imageSrc = img.target.getAttribute('src');
-  const imageCaption = img.target.closest('.element').querySelector('.element__description-text').textContent;
-
-  popupImage.setAttribute('src', imageSrc); //Настройка src фото
-  popupImage.setAttribute('alt', imageCaption); // Настройка alt фото
-  popupCaption.innerText = imageCaption; // Настройка заголовка фото
-  openPopup(popupImageViewing);
 }
 
 initialCards.forEach((item) => {
