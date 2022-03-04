@@ -73,7 +73,7 @@ function openPopup(popup) {
 }
 
 //Обработчик закрыти просмотра изображения по esc
-export const handleCardClick = (name, link) => {
+const handleCardClick = (name, link) => {
   popupImage.setAttribute('src', link); //Настройка src фото
   popupImage.setAttribute('alt', name); // Настройка alt фото
   popupCaption.innerText = name; // Настройка заголовка фото
