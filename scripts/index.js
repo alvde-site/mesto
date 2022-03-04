@@ -11,6 +11,7 @@ const profileJob = document.querySelector('.profile__job');  // Професси
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
 const popupAddFormElement = popupAddForm.querySelector('.form');
+const popupEditFormElement = popupEditForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
 const addElementLink = document.querySelector('.form__input_add_link');
 const nameInput = document.querySelector('.form__input_profile_name');
@@ -18,7 +19,6 @@ const jobInput = document.querySelector('.form__input_profile_job');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
-const template = document.querySelector('#element_template');
 
 const formData = {
   formSelector: '.form',
@@ -29,9 +29,9 @@ const formData = {
   errorClass: 'popup__input-error_active'
 }
 
-const addFormValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
+const addFormValidator = new FormValidator(formData, popupAddFormElement);
 addFormValidator.enableValidation();
-const editFormValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
+const editFormValidator = new FormValidator(formData, popupEditFormElement);
 editFormValidator.enableValidation();
 
 const createCard = (item) => {
