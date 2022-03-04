@@ -19,6 +19,10 @@ export default class FormValidator {
     })
   }
 
+  resetValidation() {
+    this._checkButtonValidity();
+  }
+
   _checkButtonValidity() {
     if(this._form.checkValidity()){
       this._submitButton.classList.remove(this._inactiveButtonClass);

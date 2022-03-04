@@ -2,18 +2,10 @@ import { initialCards } from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-class EditFormValidator {
-
-}
-class AddFormValidator {
-
-}
-
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
 const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 const popups = Array.from(document.querySelectorAll('.popup'));
-const forms = Array.from(document.querySelectorAll('.form'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
@@ -27,6 +19,20 @@ const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 const template = document.querySelector('#element_template');
+
+const formData = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
+const addFormValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
+addFormValidator.enableValidation();
+const editFormValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
+editFormValidator.enableValidation();
 
 const createCard = (item) => {
   const card = new Card(item);
@@ -45,14 +51,15 @@ const renderElement = (card, position) => {
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  const formValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
-  formValidator.enableValidation();
+
+  //const formValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
+  //formValidator.enableValidation();
   openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
-  const formValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
-  formValidator.enableValidation();
+  //const formValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
+  //formValidator.enableValidation();
   openPopup(popupAddForm);
 }
 
@@ -160,16 +167,3 @@ initialCards.forEach((item) => {
 popupEditForm.addEventListener('submit', submitProfileForm);
 popupAddForm.addEventListener('submit', submitCardForm);
 
-const formData = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'popup__input-error_active'
-}
-
-forms.forEach((item) => {
-  const formValidator = new FormValidator(formData, item);
-  formValidator.enableValidation();
-})
