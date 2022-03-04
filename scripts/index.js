@@ -47,7 +47,7 @@ const enableFormValidation = (config) => {
 enableFormValidation(formData);
 
 const createCard = (item) => {
-  const card = new Card(item, handleCardClick);
+  const card = new Card(item, '#element_template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
