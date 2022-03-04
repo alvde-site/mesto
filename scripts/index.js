@@ -51,13 +51,14 @@ const renderElement = (card, position) => {
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-
+  editFormValidator.resetValidation();
   //const formValidator = new FormValidator(formData, popupEditForm.querySelector('.form'));
   //formValidator.enableValidation();
   openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
+  addFormValidator.resetValidation();
   //const formValidator = new FormValidator(formData, popupAddForm.querySelector('.form'));
   //formValidator.enableValidation();
   openPopup(popupAddForm);
