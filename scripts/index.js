@@ -20,6 +20,9 @@ const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 
+// Объект форм с аттрибутом name;
+const formValidator = {};
+
 const formData = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -29,10 +32,19 @@ const formData = {
   errorClass: 'popup__input-error_active'
 }
 
-const addFormValidator = new FormValidator(formData, popupAddFormElement);
-addFormValidator.enableValidation();
-const editFormValidator = new FormValidator(formData, popupEditFormElement);
-editFormValidator.enableValidation();
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidator[formName] = validator;
+    validator.enableValidation();
+  });
+}
+
+enableValidation(formData);
 
 const createCard = (item) => {
   const card = new Card(item);
@@ -51,12 +63,12 @@ const renderElement = (card, position) => {
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  editFormValidator.resetValidation();
+  formValidator['profileform'].resetValidation();
   openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
-  addFormValidator.resetValidation();
+  formValidator['cardform'].resetValidation();
   openPopup(popupAddForm);
 }
 
