@@ -21,6 +21,9 @@ export default class FormValidator {
 
   resetValidation() {
     this._checkButtonValidity();
+    this._inputList.forEach((input) => {
+      this._checkInputValidity(input);
+    });
   }
 
   _checkButtonValidity() {
