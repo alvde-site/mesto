@@ -11,7 +11,6 @@ const profileJob = document.querySelector('.profile__job');  // Професси
 const popupEditForm = document.querySelector('.popup_handle_profile');  // Popup заполнения профиля данными от пользователя
 const popupAddForm = document.querySelector('.popup_handle_add-element'); // Popup создания карточки данными от пользователя
 const popupAddFormElement = popupAddForm.querySelector('.form');
-const popupEditFormElement = popupEditForm.querySelector('.form');
 const addElementName = document.querySelector('.form__input_add_name');
 const addElementLink = document.querySelector('.form__input_add_link');
 const nameInput = document.querySelector('.form__input_profile_name');
@@ -34,9 +33,10 @@ const formData = {
 
 
 // Включение валидации
-const enableValidation = (config) => {
+const enableFormValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
+    //Создание экземпляров класса FormValidator
     const validator = new FormValidator(config, formElement);
     const formName = formElement.getAttribute('name');
     formValidator[formName] = validator;
@@ -44,7 +44,7 @@ const enableValidation = (config) => {
   });
 }
 
-enableValidation(formData);
+enableFormValidation(formData);
 
 const createCard = (item) => {
   const card = new Card(item, handleCardClick);
@@ -83,11 +83,13 @@ export const handleCardClick = (name, link) => {
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
   openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
+  //Деативация кнопки сабмита
   formValidator['cardform'].resetValidation();
   openPopup(popupAddForm);
 }
