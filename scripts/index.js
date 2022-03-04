@@ -69,7 +69,7 @@ addListenerToOpenPopupButton();
 
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
+    popup.addEventListener('mousedown', (evt) => {
       // Закрытие по нажатию на overlay
       if (evt.target.classList.contains('popup_opened')) {
         closePopup(popup);
