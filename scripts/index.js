@@ -1,10 +1,11 @@
 import { initialCards } from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import { elements } from '../utils/constants.js';
 
 const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
 const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
-const elements = document.querySelector('.elements__container'); // Место вставки готовой карточки
 const popups = Array.from(document.querySelectorAll('.popup'));
 const profileName = document.querySelector('.profile__name'); // Имя профиля
 const profileJob = document.querySelector('.profile__job');  // Профессия профиля
@@ -18,6 +19,10 @@ const jobInput = document.querySelector('.form__input_profile_job');
 const popupImageViewing = document.querySelector('.popup_handle_image-viewing'); // Popup просмотр изображения
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
+
+const cardsList = new Section({
+}
+);
 
 // Объект форм с аттрибутом name;
 const formValidator = {};
