@@ -20,10 +20,6 @@ const popupImageViewing = document.querySelector('.popup_handle_image-viewing');
 const popupImage = document.querySelector('.image-viewing__image');
 const popupCaption = document.querySelector('.image-viewing__caption');
 
-const cardsList = new Section({
-}
-);
-
 // Объект форм с аттрибутом name;
 const formValidator = {};
 
@@ -50,12 +46,6 @@ const enableFormValidation = (config) => {
 }
 
 enableFormValidation(formData);
-
-const createCard = (item) => {
-  const card = new Card(item, '#element_template', handleCardClick);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
 const renderElement = (card, position) => {
   if (position === 'start') {
@@ -84,6 +74,25 @@ const handleCardClick = (name, link) => {
   popupCaption.innerText = name; // Настройка заголовка фото
   openPopup(popupImageViewing);
 }
+
+const createCard = (item) => {
+  const card = new Card(item, '#element_template', handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+const cardsList = new Section({
+  // Массив данных для добавления карточек при загрузке страницы
+  items: initialCards,
+  // Создание и отрисовка данных на странице
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, '#element_template', handleCardClick);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement, 'start');
+  }
+}, elements);
+
+cardsList.rendererItems();
 
 function openPopupEditForm () {
   nameInput.value = profileName.textContent;
@@ -175,11 +184,6 @@ const handleEscapeKey = (evt) => {
     closePopup(openedPopup);
   }
 }
-
-initialCards.forEach((item) => {
-  const newCard = createCard(item);
-  renderElement(newCard, 'start');
-});
 
 popupEditForm.addEventListener('submit', submitProfileForm);
 popupAddForm.addEventListener('submit', submitCardForm);

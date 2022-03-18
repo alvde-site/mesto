@@ -6,6 +6,12 @@ export default class Section {
     this._container = containerSelector;
   }
 
+  rendererItems() {
+    this._initialArray.forEach(item => {
+      this._renderer(item);
+    });
+  }
+
   addItem(element, position) {
     if (position === 'start') {
       this._container.append(element);
