@@ -7,16 +7,12 @@ export default class Section {
   }
 
   rendererItems() {
-    this._initialArray.forEach(item => {
+    this._initialArray.reverse().forEach(item => {
       this._renderer(item);
     });
   }
 
-  addItem(element, position) {
-    if (position === 'start') {
-      this._container.append(element);
-    } else {
-      this._container.prepend(element);
-    }
+  addItem(element) {
+    this._container.prepend(element);
   }
 }

@@ -47,15 +47,6 @@ const enableFormValidation = (config) => {
 
 enableFormValidation(formData);
 
-const renderElement = (card, position) => {
-  if (position === 'start') {
-    elements.append(card);
-  } else {
-    elements.prepend(card);
-  }
-}
-
-
 //Закрыть popup по нажатию на esc
 const addListenerByEscapeClick = () => {
   document.addEventListener('keydown', handleEscapeKey);
@@ -75,12 +66,6 @@ const handleCardClick = (name, link) => {
   openPopup(popupImageViewing);
 }
 
-const createCard = (item) => {
-  const card = new Card(item, '#element_template', handleCardClick);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
 const cardsList = new Section({
   // Массив данных для добавления карточек при загрузке страницы
   items: initialCards,
@@ -88,7 +73,7 @@ const cardsList = new Section({
   renderer: (cardItem) => {
     const card = new Card(cardItem, '#element_template', handleCardClick);
     const cardElement = card.generateCard();
-    cardsList.addItem(cardElement, 'start');
+    cardsList.addItem(cardElement);
   }
 }, elements);
 
@@ -165,16 +150,27 @@ function submitProfileForm(evt) {
   setProfileText();
 }
 
+
+//Добавление карточек на страницу через форму
 function submitCardForm(evt) {
-  const dataAddForm = {
+  const popup = getPopup(evt);
+  handleSubmitForm(evt, popup);
+  const dataAddForm = [
+    {
     name: addElementName.value,
     link: addElementLink.value
-  }
-  const newCard = createCard(dataAddForm);
-  renderElement(newCard, 'end');
-  const popup = getPopup(evt);
+    }
+  ]
+  const newCard = new Section({
+    items: dataAddForm,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, '#element_template', handleCardClick);
+      const cardElement = card.generateCard();
+      newCard.addItem(cardElement);
+    }
+  }, elements);
+  newCard.rendererItems();
   closePopup(popup);
-  handleSubmitForm(evt, popup);
   popupAddFormElement.reset();
 }
 
