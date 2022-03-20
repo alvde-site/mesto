@@ -18,21 +18,12 @@ import {
   jobInput,
   popupImageViewing,
   popupImage,
-  popupCaption
+  popupCaption,
+  formData
  } from '../utils/constants.js';
 
 // Объект форм с аттрибутом name;
 const formValidator = {};
-
-const formData = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
-  inactiveButtonClass: 'form__submit_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'popup__input-error_active'
-}
-
 
 // Включение валидации
 const enableFormValidation = (config) => {
