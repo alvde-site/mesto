@@ -18,11 +18,35 @@ import {
   nameInput,
   jobInput,
   popupImageViewing,
-  popupImage,
-  popupCaption,
+  //popupImage,
+  //popupCaption,
   formData
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm  from '../components/PopupWithForm.js';
+
+//Добавление карточек на страницу через форму
+/*function submitCardForm(evt) {
+  const popup = getPopup(evt);
+  handleSubmitForm(evt, popup);
+  const dataAddForm = [
+    {
+    name: addElementName.value,
+    link: addElementLink.value
+    }
+  ]
+  const newCard = new Section({
+    items: dataAddForm,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, '#element_template', handleCardClick);
+      const cardElement = card.generateCard();
+      newCard.addItem(cardElement);
+    }
+  }, elements);
+  newCard.rendererItems();
+  closePopup(popup);
+  popupAddFormElement.reset();
+}*/
 
 // Объект форм с аттрибутом name;
 const formValidator = {};
@@ -65,15 +89,41 @@ function openPopupEditForm () {
   jobInput.value = profileJob.textContent;
   //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
-  const handlePopup = new Popup(popupEditForm);
-  handlePopup.open();
+  const popupHandle = new Popup(popupEditForm);
+  popupHandle.open();
 }
 
 function openPopupAddElementForm () {
   //Деативация кнопки сабмита
   formValidator['cardform'].resetValidation();
-  const handlePopup = new Popup(popupAddForm);
-  handlePopup.open();
+  //const popupHandle = new Popup(popupAddForm);
+  const popupWithForm = new PopupWithForm({
+    popupSelector: popupAddForm,
+    submitForm: (evt) => {
+      //const popup = getPopup(evt);
+      //handleSubmitForm(evt);
+      evt.preventDefault();
+      const dataAddForm = [
+        {
+        name: addElementName.value,
+        link: addElementLink.value
+        }
+      ]
+      const newCard = new Section({
+        items: dataAddForm,
+        renderer: (cardItem) => {
+          const card = new Card(cardItem, '#element_template', handleCardClick);
+          const cardElement = card.generateCard();
+          newCard.addItem(cardElement);
+        }
+      }, elements);
+      newCard.rendererItems();
+      //closePopup(popup);
+      popupWithForm.close();
+      //popupAddFormElement.reset();
+    }
+  });
+  popupWithForm.open();
 }
 
 const addListenerToOpenPopupButton = () => {
@@ -98,10 +148,10 @@ function setProfileText() {
 }
 
 // Обработчик «отправки» формы
-function handleSubmitForm (evt, popup) {
-  evt.preventDefault(); // отмена стандартной отправки формы.
-  closePopup(popup);
-}
+//function handleSubmitForm (evt/*, popup*/) {
+  //evt.preventDefault(); // отмена стандартной отправки формы.
+  //closePopup(popup);
+//}
 
 const getPopup = (evt) => {
   const popup = evt.target.closest('.popup');
@@ -120,30 +170,6 @@ function submitProfileForm(evt) {
   setProfileText();
 }
 
-
-//Добавление карточек на страницу через форму
-function submitCardForm(evt) {
-  const popup = getPopup(evt);
-  handleSubmitForm(evt, popup);
-  const dataAddForm = [
-    {
-    name: addElementName.value,
-    link: addElementLink.value
-    }
-  ]
-  const newCard = new Section({
-    items: dataAddForm,
-    renderer: (cardItem) => {
-      const card = new Card(cardItem, '#element_template', handleCardClick);
-      const cardElement = card.generateCard();
-      newCard.addItem(cardElement);
-    }
-  }, elements);
-  newCard.rendererItems();
-  closePopup(popup);
-  popupAddFormElement.reset();
-}
-
-popupEditForm.addEventListener('submit', submitProfileForm);
-popupAddForm.addEventListener('submit', submitCardForm);
+//popupEditForm.addEventListener('submit', submitProfileForm);
+//popupAddForm.addEventListener('submit', submitCardForm);
 
