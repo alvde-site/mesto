@@ -89,8 +89,14 @@ function openPopupEditForm () {
   jobInput.value = profileJob.textContent;
   //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
-  const popupHandle = new Popup(popupEditForm);
-  popupHandle.open();
+  const popupWithForm = new PopupWithForm({
+    popupSelector: popupEditForm,
+    submitForm: (formValues) => {
+      console.log(formValues);
+      popupWithForm.close();
+    }
+  });
+  popupWithForm.open();
 }
 
 function openPopupAddElementForm () {
