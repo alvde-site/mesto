@@ -99,16 +99,18 @@ function openPopupAddElementForm () {
   //const popupHandle = new Popup(popupAddForm);
   const popupWithForm = new PopupWithForm({
     popupSelector: popupAddForm,
-    submitForm: (evt) => {
+    submitForm: (formValues) => {
       //const popup = getPopup(evt);
       //handleSubmitForm(evt);
-      evt.preventDefault();
-      const dataAddForm = [
+      //evt.preventDefault();
+     /* const dataAddForm = [
         {
         name: addElementName.value,
         link: addElementLink.value
         }
-      ]
+      ]*/
+      const dataAddForm = [];
+      dataAddForm.push(formValues);
       const newCard = new Section({
         items: dataAddForm,
         renderer: (cardItem) => {
