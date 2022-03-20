@@ -96,9 +96,7 @@ addListenerToOpenPopupButton();
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
     const handlePopup = new Popup(popup);
-    popup.addEventListener('mousedown', (evt) => {
-      handlePopup.setEventListeners(evt);
-    });
+    handlePopup.setEventListeners();
   });
 };
 
