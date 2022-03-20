@@ -45,12 +45,6 @@ const addListenerByEscapeClick = () => {
   document.addEventListener('keydown', handleEscapeKey);
 };
 
-//Открыть popup
-/*function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  addListenerByEscapeClick();
-}*/
-
 //Обработчик закрыти просмотра изображения по esc
 const handleCardClick = (name, link) => {
   popupImage.setAttribute('src', link); //Настройка src фото
@@ -59,7 +53,6 @@ const handleCardClick = (name, link) => {
   const handlePopup = new Popup(popupImageViewing);
   handlePopup.open();
   addListenerByEscapeClick();
-  //openPopup(popupImageViewing);
 }
 
 const cardsList = new Section({
@@ -83,7 +76,6 @@ function openPopupEditForm () {
   const handlePopup = new Popup(popupEditForm);
   handlePopup.open();
   addListenerByEscapeClick();
-  //openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
@@ -92,7 +84,6 @@ function openPopupAddElementForm () {
   const handlePopup = new Popup(popupAddForm);
   handlePopup.open();
   addListenerByEscapeClick();
-  //openPopup(popupAddForm);
 }
 
 const addListenerToOpenPopupButton = () => {
@@ -104,15 +95,9 @@ addListenerToOpenPopupButton();
 
 const addListenersToClosePopups = () => {
   popups.forEach((popup) => {
+    const handlePopup = new Popup(popup);
     popup.addEventListener('mousedown', (evt) => {
-      // Закрытие по нажатию на overlay
-      if (evt.target.classList.contains('popup_opened')) {
-        closePopup(popup);
-      }
-      // Закрытие по нажатию на крестик
-      if (evt.target.classList.contains('popup__close')) {
-        closePopup(popup);
-      }
+      handlePopup.setEventListeners(evt);
     });
   });
 };

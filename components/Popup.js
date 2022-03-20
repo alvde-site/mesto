@@ -10,5 +10,14 @@ export default class Popup {
     this._popupSelector.classList.remove('popup_opened');
   }
   _handleEscClose() {}
-  setEventListeners() {}
+  setEventListeners(evt) {
+    // Закрытие по нажатию на overlay
+    if (evt.target.classList.contains('popup_opened')) {
+      this.close();
+    }
+     // Закрытие по нажатию на крестик
+    if (evt.target.classList.contains('popup__close')) {
+      this.close();
+    }
+  }
 }
