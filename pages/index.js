@@ -22,6 +22,7 @@ import {
   popupCaption,
   formData
  } from '../utils/constants.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 // Объект форм с аттрибутом name;
 const formValidator = {};
@@ -42,11 +43,8 @@ enableFormValidation(formData);
 
 //Обработчик закрыти просмотра изображения по esc
 const handleCardClick = (name, link) => {
-  popupImage.setAttribute('src', link); //Настройка src фото
-  popupImage.setAttribute('alt', name); // Настройка alt фото
-  popupCaption.innerText = name; // Настройка заголовка фото
-  const handlePopup = new Popup(popupImageViewing);
-  handlePopup.open();
+  const handleImagePopup = new PopupWithImage(popupImageViewing, name, link);
+  handleImagePopup.open();
 }
 
 const cardsList = new Section({
