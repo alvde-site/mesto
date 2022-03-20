@@ -40,11 +40,6 @@ const enableFormValidation = (config) => {
 
 enableFormValidation(formData);
 
-//Закрыть popup по нажатию на esc
-const addListenerByEscapeClick = () => {
-  document.addEventListener('keydown', handleEscapeKey);
-};
-
 //Обработчик закрыти просмотра изображения по esc
 const handleCardClick = (name, link) => {
   popupImage.setAttribute('src', link); //Настройка src фото
@@ -52,7 +47,6 @@ const handleCardClick = (name, link) => {
   popupCaption.innerText = name; // Настройка заголовка фото
   const handlePopup = new Popup(popupImageViewing);
   handlePopup.open();
-  addListenerByEscapeClick();
 }
 
 const cardsList = new Section({
@@ -75,7 +69,6 @@ function openPopupEditForm () {
   formValidator['profileform'].resetValidation();
   const handlePopup = new Popup(popupEditForm);
   handlePopup.open();
-  addListenerByEscapeClick();
 }
 
 function openPopupAddElementForm () {
@@ -83,7 +76,6 @@ function openPopupAddElementForm () {
   formValidator['cardform'].resetValidation();
   const handlePopup = new Popup(popupAddForm);
   handlePopup.open();
-  addListenerByEscapeClick();
 }
 
 const addListenerToOpenPopupButton = () => {
@@ -101,10 +93,6 @@ const addListenersToClosePopups = () => {
 };
 
 addListenersToClosePopups();
-
-const removeListenerByEscapeClick = () => {
-  document.removeEventListener('keydown', handleEscapeKey);
-}
 
 function setProfileText() {
   profileName.textContent = nameInput.value;
@@ -125,7 +113,6 @@ const getPopup = (evt) => {
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
-  removeListenerByEscapeClick();
 }
 
 function submitProfileForm(evt) {
@@ -157,13 +144,6 @@ function submitCardForm(evt) {
   newCard.rendererItems();
   closePopup(popup);
   popupAddFormElement.reset();
-}
-
-const handleEscapeKey = (evt) => {
-  if(evt.key === 'Escape'){
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
 }
 
 popupEditForm.addEventListener('submit', submitProfileForm);
