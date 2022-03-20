@@ -3,8 +3,12 @@ export default class Popup {
     this._popupSelector = popupSelector;
   }
 
-  open() {}
-  close() {}
+  open() {
+    this._popupSelector.classList.add('popup_opened');
+  }
+  close() {
+    this._popupSelector.classList.remove('popup_opened');
+  }
   _handleEscClose() {}
   setEventListeners() {}
 }

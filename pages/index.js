@@ -1,7 +1,8 @@
-import { initialCards } from '../utils/initialCards.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
+import { initialCards } from '../utils/initialCards.js';
 import {
   elements,
   editButton,
@@ -45,17 +46,20 @@ const addListenerByEscapeClick = () => {
 };
 
 //Открыть popup
-function openPopup(popup) {
+/*function openPopup(popup) {
   popup.classList.add('popup_opened');
   addListenerByEscapeClick();
-}
+}*/
 
 //Обработчик закрыти просмотра изображения по esc
 const handleCardClick = (name, link) => {
   popupImage.setAttribute('src', link); //Настройка src фото
   popupImage.setAttribute('alt', name); // Настройка alt фото
   popupCaption.innerText = name; // Настройка заголовка фото
-  openPopup(popupImageViewing);
+  const handlePopup = new Popup(popupImageViewing);
+  handlePopup.open();
+  addListenerByEscapeClick();
+  //openPopup(popupImageViewing);
 }
 
 const cardsList = new Section({
@@ -76,13 +80,19 @@ function openPopupEditForm () {
   jobInput.value = profileJob.textContent;
   //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
-  openPopup(popupEditForm);
+  const handlePopup = new Popup(popupEditForm);
+  handlePopup.open();
+  addListenerByEscapeClick();
+  //openPopup(popupEditForm);
 }
 
 function openPopupAddElementForm () {
   //Деативация кнопки сабмита
   formValidator['cardform'].resetValidation();
-  openPopup(popupAddForm);
+  const handlePopup = new Popup(popupAddForm);
+  handlePopup.open();
+  addListenerByEscapeClick();
+  //openPopup(popupAddForm);
 }
 
 const addListenerToOpenPopupButton = () => {
