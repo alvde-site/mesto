@@ -12,42 +12,14 @@ import {
   profileJob,
   popupEditForm,
   popupAddForm,
-  popupAddFormElement,
-  addElementName,
-  addElementLink,
   nameInput,
   jobInput,
   popupImageViewing,
-  //popupImage,
-  //popupCaption,
   formData
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-
-//Добавление карточек на страницу через форму
-/*function submitCardForm(evt) {
-  const popup = getPopup(evt);
-  handleSubmitForm(evt, popup);
-  const dataAddForm = [
-    {
-    name: addElementName.value,
-    link: addElementLink.value
-    }
-  ]
-  const newCard = new Section({
-    items: dataAddForm,
-    renderer: (cardItem) => {
-      const card = new Card(cardItem, '#element_template', handleCardClick);
-      const cardElement = card.generateCard();
-      newCard.addItem(cardElement);
-    }
-  }, elements);
-  newCard.rendererItems();
-  closePopup(popup);
-  popupAddFormElement.reset();
-}*/
 
 // Объект форм с аттрибутом name;
 const formValidator = {};
@@ -96,8 +68,6 @@ function openPopupEditForm () {
     popupSelector: popupEditForm,
     submitForm: (formValues) => {
       userInfo.setUserInfo(formValues)
-      //profileName.textContent = nameInput.value;
-      //profileJob.textContent = jobInput.value;
       popupWithForm.close();
     }
   });
@@ -107,19 +77,9 @@ function openPopupEditForm () {
 function openPopupAddElementForm () {
   //Деативация кнопки сабмита
   formValidator['cardform'].resetValidation();
-  //const popupHandle = new Popup(popupAddForm);
   const popupWithForm = new PopupWithForm({
     popupSelector: popupAddForm,
     submitForm: (formValues) => {
-      //const popup = getPopup(evt);
-      //handleSubmitForm(evt);
-      //evt.preventDefault();
-     /* const dataAddForm = [
-        {
-        name: addElementName.value,
-        link: addElementLink.value
-        }
-      ]*/
       const dataAddForm = [];
       dataAddForm.push(formValues);
       console.log(dataAddForm)
@@ -132,9 +92,7 @@ function openPopupAddElementForm () {
         }
       }, elements);
       newCard.rendererItems();
-      //closePopup(popup);
       popupWithForm.close();
-      //popupAddFormElement.reset();
     }
   });
   popupWithForm.open();
@@ -155,35 +113,4 @@ const addListenersToClosePopups = () => {
 };
 
 addListenersToClosePopups();
-
-function setProfileText() {
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-}
-
-// Обработчик «отправки» формы
-//function handleSubmitForm (evt/*, popup*/) {
-  //evt.preventDefault(); // отмена стандартной отправки формы.
-  //closePopup(popup);
-//}
-
-const getPopup = (evt) => {
-  const popup = evt.target.closest('.popup');
-  return popup;
-}
-
-
-function closePopup (popup) {
-  popup.classList.remove('popup_opened');
-}
-
-function submitProfileForm(evt) {
-  const popup = getPopup(evt);
-  closePopup(popup);
-  handleSubmitForm(evt, popup);
-  setProfileText();
-}
-
-//popupEditForm.addEventListener('submit', submitProfileForm);
-//popupAddForm.addEventListener('submit', submitCardForm);
 
