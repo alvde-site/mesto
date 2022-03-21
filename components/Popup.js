@@ -6,7 +6,6 @@ export default class Popup {
 
   open() {
     this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('keydown', this._handleEsc);
   }
   close() {
     this._popupSelector.classList.remove('popup_opened');
@@ -19,6 +18,7 @@ export default class Popup {
   }
 
   setEventListeners() {
+    document.addEventListener('keydown', this._handleEsc);
     this._popupSelector.addEventListener('mousedown', (evt) => {
       // Закрытие по нажатию на overlay
       if (evt.target.classList.contains('popup_opened')) {
