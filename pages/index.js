@@ -21,7 +21,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
-// Объект форм с аттрибутом name;
+// Объект с набором форм и аттрибутом name;
 const formValidator = {};
 
 // Включение валидации
@@ -38,7 +38,6 @@ const enableFormValidation = (config) => {
 
 enableFormValidation(formData);
 
-//Обработчик закрыти просмотра изображения по esc
 const handleCardClick = (name, link) => {
   const handleImagePopup = new PopupWithImage(popupImageViewing, name, link);
   handleImagePopup.open();
