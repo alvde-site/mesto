@@ -27,6 +27,8 @@ export default class Card {
     this._cardText.innerText = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
+   // console.log(this._name)
+    //console.log(this._link)
     return this._element;
   }
 

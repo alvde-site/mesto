@@ -8,6 +8,7 @@ export default class Section {
 
   rendererItems() {
     this._initialArray.reverse().forEach(item => {
+      //console.log(item)
       this._renderer(item);
     });
   }

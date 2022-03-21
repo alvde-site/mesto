@@ -122,6 +122,7 @@ function openPopupAddElementForm () {
       ]*/
       const dataAddForm = [];
       dataAddForm.push(formValues);
+      console.log(dataAddForm)
       const newCard = new Section({
         items: dataAddForm,
         renderer: (cardItem) => {
