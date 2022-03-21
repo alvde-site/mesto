@@ -24,6 +24,7 @@ import {
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 //Добавление карточек на страницу через форму
 /*function submitCardForm(evt) {
@@ -85,14 +86,18 @@ const cardsList = new Section({
 cardsList.rendererItems();
 
 function openPopupEditForm () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  const userInfo = new UserInfo(profileName, profileJob);
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData['profile__name'];
+  jobInput.value = userData['profile__job'];
   //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
   const popupWithForm = new PopupWithForm({
     popupSelector: popupEditForm,
     submitForm: (formValues) => {
-      console.log(formValues);
+      userInfo.setUserInfo(formValues)
+      //profileName.textContent = nameInput.value;
+      //profileJob.textContent = jobInput.value;
       popupWithForm.close();
     }
   });
