@@ -20,7 +20,7 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     this._popupForm.addEventListener('submit', this._handleSubmit);
-    console.log('добавил слушателя')
+    super.setEventListeners();
   }
 
   _handleSubmit(evt) {
@@ -37,6 +37,5 @@ export default class PopupWithForm extends Popup {
     super.close();
     this._popupForm.reset();
     this._popupForm.removeEventListener('submit', this._handleSubmit);
-    console.log('удалил слушатель')
   }
 }
