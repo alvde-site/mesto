@@ -2,20 +2,12 @@ import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import { initialCards } from '../utils/initialCards.js';
 import {
-  elements,
   editButton,
   addButton,
-  popups,
-  profileName,
-  profileJob,
-  popupEditForm,
-  popupAddForm,
   nameInput,
   jobInput,
-  popupImageViewing,
   formData
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -39,77 +31,81 @@ const enableFormValidation = (config) => {
 
 enableFormValidation(formData);
 
+// Попап просмотра изображения
+const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
 const handleCardClick = (name, link) => {
-  const handleImagePopup = new PopupWithImage(popupImageViewing, name, link);
-  handleImagePopup.open();
+  imagePopup.open(name, link);
 }
 
+imagePopup.setEventListeners();
+
+
+
+const createCard = (cardItem, handleCardClick)=> {
+  const card = new Card(cardItem, '#element_template', handleCardClick);
+  return card;
+}
+
+// Отрисовка элементов на странице
 const cardsList = new Section({
   // Массив данных для добавления карточек при загрузке страницы
   items: initialCards,
   // Создание и отрисовка данных на странице
   renderer: (cardItem) => {
-    const card = new Card(cardItem, '#element_template', handleCardClick);
+    const card = createCard(cardItem, handleCardClick);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   }
-}, elements);
+}, '.elements__container');
 
 cardsList.rendererItems();
 
-function openPopupEditForm () {
-  const userInfo = new UserInfo(profileName, profileJob);
-  const userData = userInfo.getUserInfo();
-  nameInput.value = userData['profile__name'];
-  jobInput.value = userData['profile__job'];
-  //Деативация кнопки сабмита
-  formValidator['profileform'].resetValidation();
-  const popupWithForm = new PopupWithForm({
-    popupSelector: popupEditForm,
-    submitForm: (formValues) => {
-      userInfo.setUserInfo(formValues)
-      popupWithForm.close();
-    }
-  });
-  popupWithForm.open();
-}
+// Попап формы добавления карточки на страницу
+const formAdd = new PopupWithForm({
+  popupSelector: '.popup_handle_add-element',
+  submitForm: (formValues) => {
+    const card = createCard(formValues, handleCardClick);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+    formAdd.close();
+  }
+})
+
+formAdd.setEventListeners();
 
 function openPopupAddElementForm () {
   //Деативация кнопки сабмита
   formValidator['cardform'].resetValidation();
-  const popupWithForm = new PopupWithForm({
-    popupSelector: popupAddForm,
-    submitForm: (formValues) => {
-      const dataAddForm = [];
-      dataAddForm.push(formValues);
-      const newCard = new Section({
-        items: dataAddForm,
-        renderer: (cardItem) => {
-          const card = new Card(cardItem, '#element_template', handleCardClick);
-          const cardElement = card.generateCard();
-          newCard.addItem(cardElement);
-        }
-      }, elements);
-      newCard.rendererItems();
-      popupWithForm.close();
-    }
-  });
-  popupWithForm.open();
+  formAdd.open();
 }
 
-const addListenerToOpenPopupButton = () => {
-  editButton.addEventListener('click', () => { openPopupEditForm()});
-  addButton.addEventListener('click', () => { openPopupAddElementForm()});
+// Управление отображением информации профиля пользователя
+const userInfo = new UserInfo('.profile__name', '.profile__job');
+const userData = userInfo.getUserInfo();
+nameInput.value = userData['profile__name'];
+jobInput.value = userData['profile__job'];
+
+// Попап формы редактирования профиля
+const formEdit = new PopupWithForm({
+  popupSelector: '.popup_handle_profile',
+  submitForm: (formValues) => {
+    userInfo.setUserInfo(formValues)
+    formEdit.close();
+  }
+});
+
+formEdit.setEventListeners();
+
+function openPopupEditForm () {
+  //Деативация кнопки сабмита
+  formValidator['profileform'].resetValidation();
+  formEdit.open();
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData['profile__name'];
+  jobInput.value = userData['profile__job'];
 }
 
-addListenerToOpenPopupButton();
 
-const addListenersToClosePopups = () => {
-  popups.forEach((popup) => {
-    const handlePopup = new Popup(popup);
-    handlePopup.setEventListeners();
-  });
-};
-
-addListenersToClosePopups();
-
+// Добавить слушатели кнопкам открытия попапов редактирования профиля и добавления карточки
+editButton.addEventListener('click', () => { openPopupEditForm()});
+addButton.addEventListener('click', () => { openPopupAddElementForm()});

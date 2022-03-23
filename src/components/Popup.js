@@ -1,15 +1,15 @@
 export default class Popup {
   constructor(popupSelector){
-    this._popupSelector = popupSelector;
+    this._popupElement = document.querySelector(popupSelector);
     this._handleEsc = this._handleEscClose.bind(this);
   }
 
   open() {
-    this._popupSelector.classList.add('popup_opened');
+    this._popupElement.classList.add('popup_opened');
     this._addEscCloseListnener();
   }
   close() {
-    this._popupSelector.classList.remove('popup_opened');
+    this._popupElement.classList.remove('popup_opened');
     this._removeEscCloseListener();
   }
 
@@ -27,7 +27,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupSelector.addEventListener('mousedown', (evt) => {
+    this._popupElement.addEventListener('mousedown', (evt) => {
       // Закрытие по нажатию на overlay
       if (evt.target.classList.contains('popup_opened')) {
         this.close();
