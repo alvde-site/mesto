@@ -43,7 +43,7 @@ imagePopup.setEventListeners();
 
 const createCard = (cardItem, handleCardClick)=> {
   const card = new Card(cardItem, '#element_template', handleCardClick);
-  return card;
+  return card.generateCard();
 }
 
 // Отрисовка элементов на странице
@@ -52,9 +52,7 @@ const cardsList = new Section({
   items: initialCards,
   // Создание и отрисовка данных на странице
   renderer: (cardItem) => {
-    const card = createCard(cardItem, handleCardClick);
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
+    cardsList.addItem(createCard(cardItem, handleCardClick));
   }
 }, '.elements__container');
 
@@ -64,9 +62,7 @@ cardsList.rendererItems();
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {
-    const card = createCard(formValues, handleCardClick);
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
+    cardsList.addItem(createCard(formValues, handleCardClick));
     formAdd.close();
   }
 })
@@ -81,9 +77,6 @@ function openPopupAddElementForm () {
 
 // Управление отображением информации профиля пользователя
 const userInfo = new UserInfo('.profile__name', '.profile__job');
-const userData = userInfo.getUserInfo();
-nameInput.value = userData['profile__name'];
-jobInput.value = userData['profile__job'];
 
 // Попап формы редактирования профиля
 const formEdit = new PopupWithForm({
@@ -99,10 +92,10 @@ formEdit.setEventListeners();
 function openPopupEditForm () {
   //Деативация кнопки сабмита
   formValidator['profileform'].resetValidation();
-  formEdit.open();
   const userData = userInfo.getUserInfo();
   nameInput.value = userData['profile__name'];
   jobInput.value = userData['profile__job'];
+  formEdit.open();
 }
 
 
