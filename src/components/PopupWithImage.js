@@ -8,11 +8,9 @@ export default class PopupWithImage extends Popup {
   }
 
   open(name, link) {
-    this._name = name;
-    this._link = link;
-    this._popupImage.setAttribute('src', this._link); //Настройка src фото
-    this._popupImage.setAttribute('alt', this._name); // Настройка alt фото
-    this._popupCaption.innerText = this._name; // Настройка заголовка фото
+    this._popupImage.setAttribute('src', link); //Настройка src фото
+    this._popupImage.setAttribute('alt', name); // Настройка alt фото
+    this._popupCaption.innerText = name; // Настройка заголовка фото
     super.open();
   }
 }
