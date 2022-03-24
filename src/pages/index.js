@@ -48,15 +48,12 @@ const createCard = (cardItem, handleCardClick)=> {
 
 // Отрисовка элементов на странице
 const cardsList = new Section({
-  // Массив данных для добавления карточек при загрузке страницы
-  items: initialCards,
-  // Создание и отрисовка данных на странице
   renderer: (cardItem) => {
     cardsList.addItem(createCard(cardItem, handleCardClick));
   }
 }, '.elements__container');
 
-cardsList.rendererItems();
+cardsList.rendererItems(initialCards);
 
 // Попап формы добавления карточки на страницу
 const formAdd = new PopupWithForm({
