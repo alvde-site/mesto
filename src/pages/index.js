@@ -13,6 +13,18 @@ import {
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  headers: {
+    authorization: '21b633d6-0242-4229-923c-a9cd21579f97',
+    'Content-Type': 'application/json'
+  }
+});
+
+const test = api.getInitialCards();
+console.log(test);
 
 // Объект с набором форм и аттрибутом name;
 const formValidator = {};
