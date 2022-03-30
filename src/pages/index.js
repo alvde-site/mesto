@@ -29,6 +29,7 @@ api.setUserInfo().then((result)=>{
     profilejob: result.about
   }
   userInfo.setUserInfo(formValues);
+  userInfo.setUserAvatar('.profile__avatar', result.avatar);
 });
 
 // Объект с набором форм и аттрибутом name;
