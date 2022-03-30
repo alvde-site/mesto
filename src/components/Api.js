@@ -6,16 +6,30 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-39/cards', {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: '21b633d6-0242-4229-923c-a9cd21579f97'
+        authorization: this._authorization
       }
     })
       .then(res => {
         if (res.ok) {
           return res.json();
         }
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
 
+  setUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._authorization
+      }
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       });

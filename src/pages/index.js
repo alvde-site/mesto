@@ -23,8 +23,13 @@ const api = new Api({
   }
 });
 
-const test = api.getInitialCards();
-console.log(test);
+api.setUserInfo().then((result)=>{
+  const formValues = {
+    profilename: result.name,
+    profilejob: result.about
+  }
+  userInfo.setUserInfo(formValues);
+});
 
 // Объект с набором форм и аттрибутом name;
 const formValidator = {};
