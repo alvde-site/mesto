@@ -2,7 +2,6 @@ import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import { initialCards } from '../utils/initialCards.js';
 import {
   editButton,
   addButton,
@@ -23,6 +22,8 @@ const api = new Api({
   }
 });
 
+
+//Загрузка данных профиля с сервера
 api.setUserInfo().then((result)=>{
   const formValues = {
     profilename: result.name,
@@ -71,7 +72,10 @@ const cardsList = new Section({
   }
 }, '.elements__container');
 
-cardsList.rendererItems(initialCards);
+//Первоначальная загрузка карточек с сервера
+api.getInitialCards().then((initialCards)=>{
+  cardsList.rendererItems(initialCards);
+});
 
 // Попап формы добавления карточки на страницу
 const formAdd = new PopupWithForm({
