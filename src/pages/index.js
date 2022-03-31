@@ -25,11 +25,11 @@ const api = new Api({
 
 //Загрузка данных профиля с сервера
 api.setUserInfo().then((result)=>{
-  const formValues = {
+  const remoteFormValues = {
     profilename: result.name,
     profilejob: result.about
   }
-  userInfo.setUserInfo(formValues);
+  userInfo.setUserInfo(remoteFormValues);
   userInfo.setUserAvatar('.profile__avatar', result.avatar);
 });
 
@@ -73,8 +73,8 @@ const cardsList = new Section({
 }, '.elements__container');
 
 //Первоначальная загрузка карточек с сервера
-api.getInitialCards().then((initialCards)=>{
-  cardsList.rendererItems(initialCards);
+api.getInitialCards().then((remoteInitialCards)=>{
+  cardsList.rendererItems(remoteInitialCards);
 });
 
 // Попап формы добавления карточки на страницу
@@ -101,7 +101,14 @@ const userInfo = new UserInfo('.profile__name', '.profile__job');
 const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
-    userInfo.setUserInfo(formValues)
+    api.editUserInfo(formValues);
+    api.setUserInfo().then((result)=>{
+      const remoteFormValues = {
+        profilename: result.name,
+        profilejob: result.about
+      }
+      userInfo.setUserInfo(remoteFormValues);
+    });
     formEdit.close();
   }
 });

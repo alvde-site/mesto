@@ -34,4 +34,18 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
+
+  editUserInfo({profilename, profilejob}) {
+    return fetch(`${this._baseUrl}/users/me`, {
+  method: 'PATCH',
+  headers: {
+    authorization: this._authorization,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: profilename,
+    about: profilejob
+  })
+});
+  }
 }
