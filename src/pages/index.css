@@ -26,8 +26,10 @@
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__description/element__description.css);
 @import url(../blocks/element/__description-text/element__description-text.css);
+@import url(../blocks/element/__like-block/element__like-block.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__like-button/_active/element__like-button_active.css);
+@import url(../blocks/element/__like-count/element__like-count.css);
 
 /*footer начало */
 
