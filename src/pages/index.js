@@ -65,7 +65,7 @@ const createCard = (cardItem, handleCardClick)=> {
   return card.generateCard();
 }
 
-// Отрисовка элементов на странице
+// Отрисовка карточек на странице
 const cardsList = new Section({
   renderer: (cardItem) => {
     cardsList.addItem(createCard(cardItem, handleCardClick));
@@ -81,6 +81,7 @@ api.getInitialCards().then((remoteInitialCards)=>{
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {
+    api.addCard(formValues);
     cardsList.addItem(createCard(formValues, handleCardClick));
     formAdd.close();
   }

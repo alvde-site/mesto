@@ -37,15 +37,29 @@ export default class Api {
 
   editUserInfo({profilename, profilejob}) {
     return fetch(`${this._baseUrl}/users/me`, {
-  method: 'PATCH',
-  headers: {
-    authorization: this._authorization,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: profilename,
-    about: profilejob
-  })
-});
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: profilename,
+        about: profilejob
+      })
+    });
+  }
+
+  addCard({name, link}) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    });
   }
 }
