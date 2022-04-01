@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, _handleRemoveCard) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._template = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleRemoveCard = _handleRemoveCard;
   }
 
   _getTemplate() {
@@ -47,7 +48,8 @@ export default class Card {
 
   _removeElement() {
     this._removeButton.addEventListener('click', (button) => {
-      button.target.closest('.element').remove();
+      this._handleRemoveCard(button);
+      //button.target.closest('.element').remove();
     });
   }
 
