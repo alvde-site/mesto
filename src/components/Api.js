@@ -11,12 +11,12 @@ export default class Api {
         authorization: this._authorization
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then((res) =>
+    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+  )
+    .catch((err) => {
+      console.log(`Ошшибка: ${err}`);
+    });
   }
 
   getUserInfo() {
@@ -33,29 +33,10 @@ export default class Api {
         });
   }
 
-
-  /*setUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._authorization
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
-  }*/
-
   editUserInfo({profilename, profilejob}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: profilename,
         about: profilejob

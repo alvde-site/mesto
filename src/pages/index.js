@@ -23,14 +23,16 @@ const api = new Api({
   }
 });
 
-
-//Загрузка данных профиля с сервера
-api.getUserInfo().then((result)=>{
-  console.log(result)
+const setUserInfo = (result)=> {
   const remoteFormValues = {
     profilename: result.name,
     profilejob: result.about
   }
+  return remoteFormValues;
+}
+//Загрузка данных профиля с сервера
+api.getUserInfo().then((result)=>{
+  const remoteFormValues = setUserInfo(result);
   userInfo.setUserInfo(remoteFormValues);
   userInfo.setUserAvatar('.profile__avatar', result.avatar);
 });
@@ -113,10 +115,7 @@ const formEdit = new PopupWithForm({
   submitForm: (formValues) => {
     api.editUserInfo(formValues);
     api.getUserInfo().then((result)=>{
-      const remoteFormValues = {
-        profilename: result.name,
-        profilejob: result.about
-      }
+      const remoteFormValues = setUserInfo(result);
       userInfo.setUserInfo(remoteFormValues);
     });
     formEdit.close();
