@@ -93,6 +93,7 @@ const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {
     api.addCard(formValues);
+    formValues['likes'] = [];
     cardsList.addItem(createCard(formValues, handleCardClick));
     formAdd.close();
   }

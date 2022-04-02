@@ -26,6 +26,7 @@ export default class Card {
     this._likeCount = this._element.querySelector('.element__like-count');
 
     this._setEventListenter();
+    //this._showRemoveButton();
 
     this._cardText.innerText = this._name;
     this._cardImage.src = this._link;
@@ -33,7 +34,9 @@ export default class Card {
     this._likeCount.innerText = this._likes.length;
     return this._element;
   }
-
+  _showRemoveButton() {
+    this._removeButton.classList.remove('element__remove-button_hide');
+  }
   _setEventListenter() {
     this._addLikeToButton();
     this._removeElement();
