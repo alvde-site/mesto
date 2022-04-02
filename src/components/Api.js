@@ -28,9 +28,9 @@ export default class Api {
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
       )
-        .catch((err) => {
-          console.log(`Ошшибка: ${err}`);
-        });
+      .catch((err) => {
+        console.log(`Ошшибка: ${err}`);
+      });
   }
 
   editUserInfo({profilename, profilejob}) {
@@ -41,6 +41,12 @@ export default class Api {
         name: profilename,
         about: profilejob
       })
+    })
+    .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+      )
+    .catch((err) => {
+      console.log(`Ошшибка: ${err}`);
     });
   }
 
