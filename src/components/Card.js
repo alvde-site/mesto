@@ -30,7 +30,7 @@ export default class Card {
     this._cardText.innerText = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    //this._likeCount.innerText = this._likes.length;
+    this._likeCount.innerText = this._likes.length;
     return this._element;
   }
 
