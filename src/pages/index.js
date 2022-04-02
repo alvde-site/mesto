@@ -114,10 +114,7 @@ const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
     api.editUserInfo(formValues);
-    api.getUserInfo().then((result)=>{
-      const remoteFormValues = setUserInfo(result);
-      userInfo.setUserInfo(remoteFormValues);
-    });
+    userInfo.setUserInfo(formValues);
     formEdit.close();
   }
 });
