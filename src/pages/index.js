@@ -25,7 +25,8 @@ const api = new Api({
 
 
 //Загрузка данных профиля с сервера
-api.setUserInfo().then((result)=>{
+api.getUserInfo().then((result)=>{
+  console.log(result)
   const remoteFormValues = {
     profilename: result.name,
     profilejob: result.about
@@ -111,7 +112,7 @@ const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
     api.editUserInfo(formValues);
-    api.setUserInfo().then((result)=>{
+    api.getUserInfo().then((result)=>{
       const remoteFormValues = {
         profilename: result.name,
         profilejob: result.about

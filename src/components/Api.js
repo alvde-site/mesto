@@ -15,12 +15,26 @@ export default class Api {
         if (res.ok) {
           return res.json();
         }
-        // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
-  setUserInfo() {
+  getUserInfo() {
+      return fetch(`${this._baseUrl}/users/me`, {
+        headers: {
+          authorization: this._authorization
+        }
+      })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+      )
+        .catch((err) => {
+          console.log(`Ошшибка: ${err}`);
+        });
+  }
+
+
+  /*setUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         authorization: this._authorization
@@ -33,7 +47,7 @@ export default class Api {
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       });
-  }
+  }*/
 
   editUserInfo({profilename, profilejob}) {
     return fetch(`${this._baseUrl}/users/me`, {
