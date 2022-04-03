@@ -79,7 +79,7 @@ const confirmPopup = new PopupWithForm({
 confirmPopup.setEventListeners();
 
 const handleRemoveCard = (cardId, event) => {
-  confirmPopup.open(cardId, event);
+  confirmPopup.open();
   confirmPopup.confirmDeleteCard(() => {
     api.deleteCard(cardId).then(() => {
       event.target.closest('.element').remove()
