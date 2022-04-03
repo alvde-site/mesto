@@ -11,7 +11,7 @@ import {
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
-import PopupWithMessage from '../components/PopupWithMessage.js';
+import PopupWithConfirm from '../components/PopupWithConfirm';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -87,11 +87,11 @@ const enableFormValidation = (config) => {
 enableFormValidation(formData);
 
 // Попап с сообщением удаления карточки
-const messagePopup = new PopupWithMessage('.popup_handle_remove-message');
+const confirmPopup = new PopupWithConfirm('.popup_handle_remove-confirm');
 const handleRemoveCard = (button) => {
-  messagePopup.open();
+  confirmPopup.open();
 }
-messagePopup.setEventListeners();
+confirmPopup.setEventListeners();
 
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
