@@ -56,9 +56,8 @@ export default class Card {
   }
 
   _removeElement() {
-    this._removeButton.addEventListener('click', (button) => {
-      this._handleRemoveCard(this._cardId);
-      //button.target.closest('.element').remove();
+    this._removeButton.addEventListener('click', (event) => {
+      this._handleRemoveCard(this._cardId, event);
     });
   }
 

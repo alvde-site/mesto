@@ -7,16 +7,21 @@ export default class PopupWithConfirm extends Popup {
     this._popupForm = this._popupElement.querySelector('.form');
   }
 
-  open(cardId) {
+  open(cardId, event) {
     this._cardId = cardId;
+    this._event = event; //кнопка карточки удаления
     super.open();
   }
 
   setEventListeners() {
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitForm(this._cardId, evt);
+      this._submitForm(this._cardId, this._event);
     });
     super.setEventListeners();
+  }
+
+  confirmDeleteCard(newSubmitForm) {
+    this._submitForm = newSubmitForm;
   }
 }

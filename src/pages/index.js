@@ -89,18 +89,24 @@ enableFormValidation(formData);
 // Попап с сообщением удаления карточки
 const confirmPopup = new PopupWithConfirm({
   popupSelector: '.popup_handle_remove-confirm',
-  submitForm: (cardId, evt) => {  //cardId = ожидается id карточки удаления
-    console.log(cardId)
-    api.deleteCard(cardId);
-    //evt.target.closest('.element').remove();
-    confirmPopup.close();
+  submitForm: (cardId, button) => {  //cardId = ожидается id карточки удаления
+    //api.deleteCard(cardId);
+   // console.log(button.target)
+    //button.target.closest('.element').remove();
+    //confirmPopup.close();
   }
 });
 
 confirmPopup.setEventListeners();
 
-const handleRemoveCard = (cardId) => {
-  confirmPopup.open(cardId); //Передать id карточки попапу подтверждения удаления
+const handleRemoveCard = (cardId, event) => {
+  confirmPopup.open(cardId, event); //Передать id карточки попапу подтверждения удаления
+  confirmPopup.confirmDeleteCard(() => {
+    api.deleteCard(cardId).then(res => {
+      event.target.closest('.element').remove()
+      confirmPopup.close();
+    });
+  })
 }
 
 // Попап просмотра изображения
