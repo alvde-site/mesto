@@ -34,7 +34,6 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._likeCount.innerText = this._likes.length;
-    console.log(`${this._userId} = ${this._ownerId}`)
     if(this._userId !== this._ownerId) {
       this._removeButton.style.display = 'none';
     }

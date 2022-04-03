@@ -109,14 +109,14 @@ const createCard = (cardItem, handleCardClick)=> {
 }
 
 
-// Попап формы добавления карточки на страницу
+// Форма добавления карточки на страницу
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
     api.addCard(formValues);
     formValues['likes'] = [];
     formValues.owner = {};
-    formValues.owner._id = 0;
+    formValues.owner._id = userId;
     cardsList.addItem(createCard(formValues, handleCardClick));  // Вставка готового элемента на страницу
     formAdd.close();
   }
