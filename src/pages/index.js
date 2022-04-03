@@ -87,11 +87,21 @@ const enableFormValidation = (config) => {
 enableFormValidation(formData);
 
 // Попап с сообщением удаления карточки
-const confirmPopup = new PopupWithConfirm('.popup_handle_remove-confirm');
-const handleRemoveCard = (button) => {
-  confirmPopup.open();
-}
+const confirmPopup = new PopupWithConfirm({
+  popupSelector: '.popup_handle_remove-confirm',
+  submitForm: (cardId) => {  //cardId = ожидается id карточки удаления
+    //api.addCard(formValues);
+    // Нужен api удаления карточки с аргументом cardId
+    //нужен evt.preventDefault
+    confirmPopup.close();
+  }
+});
+
 confirmPopup.setEventListeners();
+
+const handleRemoveCard = (cardId) => {
+  confirmPopup.open(cardId); //Передать id карточки попапу подтверждения удаления
+}
 
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
