@@ -11,7 +11,6 @@ import {
  } from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm  from '../components/PopupWithForm.js';
-import PopupWithConfirm from '../components/PopupWithConfirm';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -44,12 +43,6 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
     cardsList.rendererItems(cards);
   })
 
-
-//Первоначальная загрузка карточек с сервера
-//api.getInitialCards().then((remoteInitialCards)=>{
-  //cardsList.rendererItems(remoteInitialCards);
-//});
-
 const setUserInfo = (result)=> {
   const remoteFormValues = {
     profilename: result.name,
@@ -61,14 +54,6 @@ const setUserInfo = (result)=> {
 // Управление отображением информации профиля пользователя
 const userInfo = new UserInfo('.profile__name', '.profile__job');
 
-//Загрузка данных профиля с сервера
-/*api.getUserInfo().then((result)=>{
-  userId = result._id; //Получение id пользователя
-  const remoteFormValues = setUserInfo(result);
-  userInfo.setUserInfo(remoteFormValues);
-  userInfo.setUserAvatar('.profile__avatar', result.avatar);
-});*/
-
 // Объект с набором форм и аттрибутом name;
 const formValidator = {};
 
@@ -76,7 +61,6 @@ const formValidator = {};
 const enableFormValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
-    //Создание экземпляров класса FormValidator
     const validator = new FormValidator(config, formElement);
     const formName = formElement.getAttribute('name');
     formValidator[formName] = validator;
@@ -87,22 +71,17 @@ const enableFormValidation = (config) => {
 enableFormValidation(formData);
 
 // Попап с сообщением удаления карточки
-const confirmPopup = new PopupWithConfirm({
+const confirmPopup = new PopupWithForm({
   popupSelector: '.popup_handle_remove-confirm',
-  submitForm: (cardId, button) => {  //cardId = ожидается id карточки удаления
-    //api.deleteCard(cardId);
-   // console.log(button.target)
-    //button.target.closest('.element').remove();
-    //confirmPopup.close();
-  }
+  submitForm: () => {}
 });
 
 confirmPopup.setEventListeners();
 
 const handleRemoveCard = (cardId, event) => {
-  confirmPopup.open(cardId, event); //Передать id карточки попапу подтверждения удаления
+  confirmPopup.open(cardId, event);
   confirmPopup.confirmDeleteCard(() => {
-    api.deleteCard(cardId).then(res => {
+    api.deleteCard(cardId).then(() => {
       event.target.closest('.element').remove()
       confirmPopup.close();
     });

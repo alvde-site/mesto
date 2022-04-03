@@ -74,7 +74,7 @@ export default class Api {
     res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     )
     .catch((err) => {
-      console.log(`Ошшибка: ${err}`);
+      console.log(`Ошибка: ${err}`);
     });
   }
 }

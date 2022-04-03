@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick, handleRemoveCard, userId) {  // (ownerId, userId)
+  constructor(data, cardSelector, handleCardClick, handleRemoveCard, userId) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -29,7 +29,6 @@ export default class Card {
     this._likeCount = this._element.querySelector('.element__like-count');
 
     this._setEventListenter();
-    //this._showRemoveButton();
 
     this._cardText.innerText = this._name;
     this._cardImage.src = this._link;
@@ -40,9 +39,7 @@ export default class Card {
     }
     return this._element;
   }
-  //_showRemoveButton() {
-  //  this._removeButton.classList.remove('element__remove-button_hide');
-  //}
+
   _setEventListenter() {
     this._addLikeToButton();
     this._removeElement();
