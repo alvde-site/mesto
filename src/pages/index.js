@@ -23,6 +23,33 @@ const api = new Api({
   }
 });
 
+// Отрисовка карточек на странице
+const cardsList = new Section({
+  renderer: (cardItem) => {
+    cardsList.addItem(createCard(cardItem, handleCardClick));
+  }
+}, '.elements__container');
+
+
+// Отображение корзинки удаления карточки
+let userId;
+
+Promise.all([api.getUserInfo(),api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData.id;
+    const remoteFormValues = setUserInfo(userData);
+    userInfo.setUserInfo(remoteFormValues);
+    userInfo.setUserAvatar('.profile__avatar', userData.avatar);
+
+    cardsList.rendererItems(cards);
+  })
+
+
+//Первоначальная загрузка карточек с сервера
+//api.getInitialCards().then((remoteInitialCards)=>{
+  //cardsList.rendererItems(remoteInitialCards);
+//});
+
 const setUserInfo = (result)=> {
   const remoteFormValues = {
     profilename: result.name,
@@ -30,12 +57,17 @@ const setUserInfo = (result)=> {
   }
   return remoteFormValues;
 }
+
+// Управление отображением информации профиля пользователя
+const userInfo = new UserInfo('.profile__name', '.profile__job');
+
 //Загрузка данных профиля с сервера
-api.getUserInfo().then((result)=>{
+/*api.getUserInfo().then((result)=>{
+  userId = result._id; //Получение id пользователя
   const remoteFormValues = setUserInfo(result);
   userInfo.setUserInfo(remoteFormValues);
   userInfo.setUserAvatar('.profile__avatar', result.avatar);
-});
+});*/
 
 // Объект с набором форм и аттрибутом name;
 const formValidator = {};
@@ -72,29 +104,18 @@ imagePopup.setEventListeners();
 
 
 const createCard = (cardItem, handleCardClick)=> {
-  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard);
+  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, userId);
   return card.generateCard();
 }
 
-// Отрисовка карточек на странице
-const cardsList = new Section({
-  renderer: (cardItem) => {
-    cardsList.addItem(createCard(cardItem, handleCardClick));
-  }
-}, '.elements__container');
-
-//Первоначальная загрузка карточек с сервера
-api.getInitialCards().then((remoteInitialCards)=>{
-  cardsList.rendererItems(remoteInitialCards);
-});
 
 // Попап формы добавления карточки на страницу
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
-  submitForm: (formValues) => {
+  submitForm: (formValues) => {  // Value полей формы добавления карточки
     api.addCard(formValues);
     formValues['likes'] = [];
-    cardsList.addItem(createCard(formValues, handleCardClick));
+    cardsList.addItem(createCard(formValues, handleCardClick));  // Вставка готового элемента на страницу
     formAdd.close();
   }
 })
@@ -106,9 +127,6 @@ function openPopupAddElementForm () {
   formValidator['cardform'].resetValidation();
   formAdd.open();
 }
-
-// Управление отображением информации профиля пользователя
-const userInfo = new UserInfo('.profile__name', '.profile__job');
 
 // Попап формы редактирования профиля
 const formEdit = new PopupWithForm({
