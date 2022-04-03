@@ -36,9 +36,9 @@ export default class Card {
     this._likeCount.innerText = this._likes.length;
     return this._element;
   }
-  _showRemoveButton() {
-    this._removeButton.classList.remove('element__remove-button_hide');
-  }
+  //_showRemoveButton() {
+  //  this._removeButton.classList.remove('element__remove-button_hide');
+  //}
   _setEventListenter() {
     this._addLikeToButton();
     this._removeElement();

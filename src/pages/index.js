@@ -104,7 +104,7 @@ imagePopup.setEventListeners();
 
 
 const createCard = (cardItem, handleCardClick)=> {
-  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, userId);
+  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, userId); // В cardItem ожидается {..., owner._id}
   return card.generateCard();
 }
 
@@ -112,9 +112,11 @@ const createCard = (cardItem, handleCardClick)=> {
 // Попап формы добавления карточки на страницу
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
-  submitForm: (formValues) => {  // Value полей формы добавления карточки
+  submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
     api.addCard(formValues);
     formValues['likes'] = [];
+    formValues.owner = {};
+    formValues.owner._id = 0;
     cardsList.addItem(createCard(formValues, handleCardClick));  // Вставка готового элемента на страницу
     formAdd.close();
   }
