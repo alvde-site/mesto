@@ -3,7 +3,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    //this._ownerId = data.owner._id;
+    this._ownerId = data.owner._id;
     this._userId = userId;
     this._template = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -34,6 +34,10 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._likeCount.innerText = this._likes.length;
+    console.log(`${this._userId} = ${this._ownerId}`)
+    if(this._userId !== this._ownerId) {
+      this._removeButton.style.display = 'none';
+    }
     return this._element;
   }
   //_showRemoveButton() {

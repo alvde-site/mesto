@@ -36,7 +36,7 @@ let userId;
 
 Promise.all([api.getUserInfo(),api.getInitialCards()])
   .then(([userData, cards]) => {
-    userId = userData.id;
+    userId = userData._id;
     const remoteFormValues = setUserInfo(userData);
     userInfo.setUserInfo(remoteFormValues);
     userInfo.setUserAvatar('.profile__avatar', userData.avatar);
