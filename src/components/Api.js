@@ -105,4 +105,20 @@ export default class Api {
       console.log(`Ошибка: ${err}`);
     });
   }
+
+  editAvatarInfo({link}) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+    .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+      )
+    .catch((err) => {
+      console.log(`Ошшибка: ${err}`);
+    });
+  }
 }

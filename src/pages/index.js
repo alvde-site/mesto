@@ -133,7 +133,11 @@ imagePopup.setEventListeners();
 // Попап редактирования аватара
 const avatarPopup = new PopupWithForm({
   popupSelector: '.popup_handle_edit-avatar',
-  submitForm: () => {}
+  submitForm: (formValues) => {
+    api.editAvatarInfo(formValues);
+    userInfo.setUserAvatar('.profile__avatar', formValues.link);
+    avatarPopup.close();
+  }
 });
 avatarPopup.setEventListeners();
 
