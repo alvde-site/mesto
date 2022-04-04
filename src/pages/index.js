@@ -24,7 +24,7 @@ const api = new Api({
 
 // Отрисовка карточек на странице
 const cardsList = new Section({
-  renderer: (cardItem) => {
+  renderer: (cardItem) => {  // cardItem = объект карточки с сервера
     cardsList.addItem(createCard(cardItem, handleCardClick));
   }
 }, '.elements__container');
@@ -40,7 +40,7 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
     userInfo.setUserInfo(remoteFormValues);
     userInfo.setUserAvatar('.profile__avatar', userData.avatar);
 
-    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section
+    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section, cards = массив объектов карточке с сервера
   })
 
 const setUserInfo = (result)=> {
@@ -88,10 +88,15 @@ const handleRemoveCard = (cardId, event) => {
   })
 }
 
-const handleLikeClick = (id) => {
+const handleLikeClick = (id, likesCounter, userId, button) => {
   api.addLike(id)
     .then(res => {
-      console.log(res.likes)
+      if(res.likes.find(item => item._id === userId)) {
+        likesCounter.innerText = res.likes.length; // Добавление лайков
+        button.target.classList.add('element__like-button_active');
+      }
+      //res.likes.forEach(item => (console.log(item._id + ' ' + userId)))
+
     })
 }
 
