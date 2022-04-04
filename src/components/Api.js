@@ -77,4 +77,18 @@ export default class Api {
       console.log(`Ошибка: ${err}`);
     });
   }
+
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorization
+      }
+    }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    )
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
 }

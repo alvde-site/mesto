@@ -40,7 +40,7 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
     userInfo.setUserInfo(remoteFormValues);
     userInfo.setUserAvatar('.profile__avatar', userData.avatar);
 
-    cardsList.rendererItems(cards);
+    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section
   })
 
 const setUserInfo = (result)=> {
@@ -88,6 +88,13 @@ const handleRemoveCard = (cardId, event) => {
   })
 }
 
+const handleLikeClick = (id) => {
+  api.addLike(id)
+    .then(res => {
+      console.log(res.likes)
+    })
+}
+
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
 const handleCardClick = (name, link) => {
@@ -99,7 +106,7 @@ imagePopup.setEventListeners();
 
 
 const createCard = (cardItem, handleCardClick)=> {
-  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, userId); // В cardItem ожидается {..., owner._id}
+  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId); // В cardItem ожидается {..., owner._id}
   return card.generateCard();
 }
 
