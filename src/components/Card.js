@@ -35,6 +35,7 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._likeCounter.innerText = this._likes.length;
+    this._setLikes();
     if(this._userId !== this._ownerId) {
       this._removeButton.style.display = 'none';
     }
@@ -64,5 +65,14 @@ export default class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
+  }
+
+  _setLikes() {
+    this._likes.forEach(like => {
+      if(like._id === this._userId) {
+        this._likeButton.classList.add('element__like-button_active');
+      }
+    });
+
   }
 }
