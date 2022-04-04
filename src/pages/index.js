@@ -27,7 +27,7 @@ const api = new Api({
 // Отрисовка карточек на странице
 const cardsList = new Section({
   renderer: (cardItem) => {  // cardItem = объект карточки с сервера
-    cardsList.addItem(createCard(cardItem, handleCardClick));
+    cardsList.addItem(createCard(cardItem));
   }
 }, '.elements__container');
 
@@ -127,7 +127,7 @@ const avatarPopup = new PopupWithForm({
 });
 avatarPopup.setEventListeners();
 
-const createCard = (cardItem, handleCardClick)=> {
+const createCard = (cardItem)=> {
   const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId);
   return card.generateCard();
 }
@@ -144,7 +144,7 @@ const formAdd = new PopupWithForm({
     formValues['likes'] = [];
     formValues.owner = {};
     formValues.owner._id = userId;
-    cardsList.addItem(createCard(formValues, handleCardClick));  // Вставка готового элемента на страницу
+    cardsList.addItem(createCard(formValues));  // Вставка готового элемента на страницу
     formAdd.close();
   }
 })

@@ -12,10 +12,10 @@ export default class Api {
       }
     })
     .then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    res.ok ? res.json() : Promise.reject(`${res.status}`)
   )
     .catch((err) => {
-      console.log(`Ошшибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 
@@ -26,10 +26,10 @@ export default class Api {
         }
       })
       .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+        res.ok ? res.json() : Promise.reject(`${res.status}`)
       )
       .catch((err) => {
-        console.log(`Ошшибка: ${err}`);
+        console.log(`${err}`);
       });
   }
 
@@ -43,10 +43,10 @@ export default class Api {
       })
     })
     .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+        res.ok ? res.json() : Promise.reject(`${res.status}`)
       )
     .catch((err) => {
-      console.log(`Ошшибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 
@@ -71,10 +71,10 @@ export default class Api {
         authorization: this._authorization
       }
     }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    res.ok ? res.json() : Promise.reject(`${res.status}`)
     )
     .catch((err) => {
-      console.log(`Ошибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 
@@ -85,10 +85,10 @@ export default class Api {
         authorization: this._authorization
       }
     }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    res.ok ? res.json() : Promise.reject(`${res.status}`)
     )
     .catch((err) => {
-      console.log(`Ошибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 
@@ -99,10 +99,10 @@ export default class Api {
         authorization: this._authorization
       }
     }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    res.ok ? res.json() : Promise.reject(`${res.status}`)
     )
     .catch((err) => {
-      console.log(`Ошибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 
@@ -115,10 +115,10 @@ export default class Api {
       })
     })
     .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+        res.ok ? res.json() : Promise.reject(`${res.status}`)
       )
     .catch((err) => {
-      console.log(`Ошшибка: ${err}`);
+      console.log(`${err}`);
     });
   }
 }
