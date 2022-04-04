@@ -1,3 +1,13 @@
+const customFetch = (url, options = {})=> {
+  return fetch(url, options)
+  .then((res) =>
+  res.ok ? res.json() : Promise.reject(`${res.status}`)
+)
+  .catch((err) => {
+    console.log(`${err}`);
+  })
+}
+
 export default class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
@@ -6,31 +16,23 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._authorization
-      }
-    })
-    .then((res) =>
-    res.ok ? res.json() : Promise.reject(`${res.status}`)
-  )
-    .catch((err) => {
-      console.log(`${err}`);
-    });
-  }
-
-  getUserInfo() {
-      return fetch(`${this._baseUrl}/users/me`, {
+    return customFetch(
+      `${this._baseUrl}/cards`, {
         headers: {
           authorization: this._authorization
         }
-      })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`${res.status}`)
+      }
+    )
+  }
+
+  getUserInfo() {
+      return customFetch(
+        `${this._baseUrl}/users/me`, {
+          headers: {
+            authorization: this._authorization
+          }
+        }
       )
-      .catch((err) => {
-        console.log(`${err}`);
-      });
   }
 
   editUserInfo({profilename, profilejob}) {
