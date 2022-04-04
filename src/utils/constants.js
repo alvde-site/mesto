@@ -1,5 +1,6 @@
 export const editButton = document.querySelector('.profile__edit-button'); // Кнопка открытия popup формы заполнения профиля
 export const addButton = document.querySelector('.profile__add-button'); // Кнопка открытия popup формы добавления катрочки
+export const editAvatarButton = document.querySelector('.profile__edit-avatar-button'); // Кнопка открытия popup формы редактирования аватара
 export const profileName = document.querySelector('.profile__name'); // Имя профиля
 export const profileJob = document.querySelector('.profile__job');  // Профессия профиля
 export const addElementName = document.querySelector('.form__input_add_name');

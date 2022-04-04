@@ -100,6 +100,18 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_handle_edit-avatar">
+      <div class="popup__container">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form action="#" name="avatarform" class="form" novalidate>
+          <h2 class="form__title">Обновить аватар</h2>
+          <label for="addlink" class="form__field">
+            <input id="addlink" type="url" class="form__input form__input_add_link" name="link" placeholder="Ссылка на картинку" required>
+            <span id="error-addlink" class="form__input-error"></span>
+          </label>
+          <button class="form__submit form__submit_add-form" type="submit">Сохранить</button>
+        </form>
+      </div>
   </div>
   <template id="element_template">
     <li class="element">

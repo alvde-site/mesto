@@ -5,6 +5,7 @@ import Section from '../components/Section.js';
 import {
   editButton,
   addButton,
+  editAvatarButton,
   nameInput,
   jobInput,
   formData
@@ -98,14 +99,12 @@ const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
       .then((res) => {
         button.target.classList.remove('element__like-button_active');
         likeCounter.innerText = res.likes.length;
-       console.log('remove')
     })
   } else {
     api.addLike(cardId)
       .then((res) => {
         button.target.classList.add('element__like-button_active');
         likeCounter.innerText = res.likes.length;
-        console.log('add')
     })
   }
 }
@@ -129,10 +128,14 @@ const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
 const handleCardClick = (name, link) => {
   imagePopup.open(name, link);
 }
-
 imagePopup.setEventListeners();
 
-
+// Попап редактирования аватара
+const avatarPopup = new PopupWithForm({
+  popupSelector: '.popup_handle_edit-avatar',
+  submitForm: () => {}
+});
+avatarPopup.setEventListeners();
 
 const createCard = (cardItem, handleCardClick)=> {
   const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId); // В cardItem ожидается {..., owner._id}
@@ -182,7 +185,17 @@ function openPopupEditForm () {
   formEdit.open();
 }
 
+function openPopupEditAvatar () {
+  //Деативация кнопки сабмита
+  formValidator['avatarform'].resetValidation();
+  //const userData = userInfo.getUserInfo();
+  //nameInput.value = userData['profile__name'];
+  //jobInput.value = userData['profile__job'];
+  avatarPopup.open();
+}
 
 // Добавить слушатели кнопкам открытия попапов редактирования профиля и добавления карточки
 editButton.addEventListener('click', () => { openPopupEditForm()});
 addButton.addEventListener('click', () => { openPopupAddElementForm()});
+editAvatarButton.addEventListener('click', () => { openPopupEditAvatar()});
+
