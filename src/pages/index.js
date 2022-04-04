@@ -134,7 +134,10 @@ imagePopup.setEventListeners();
 const avatarPopup = new PopupWithForm({
   popupSelector: '.popup_handle_edit-avatar',
   submitForm: (formValues) => {
-    api.editAvatarInfo(formValues);
+    api.editAvatarInfo(formValues)
+      .finally(()=>{
+        avatarPopup.renderLoading(false);
+      });
     userInfo.setUserAvatar('.profile__avatar', formValues.link);
     avatarPopup.close();
   }
@@ -151,7 +154,10 @@ const createCard = (cardItem, handleCardClick)=> {
 const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
-    api.addCard(formValues);
+    api.addCard(formValues)
+    .finally(()=>{
+      formAdd.renderLoading(false);
+    });
     formValues['likes'] = [];
     formValues.owner = {};
     formValues.owner._id = userId;
@@ -172,7 +178,10 @@ function openPopupAddElementForm () {
 const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
-    api.editUserInfo(formValues);
+    api.editUserInfo(formValues)
+      .finally(()=>{
+        formEdit.renderLoading(false);
+      });
     userInfo.setUserInfo(formValues);
     formEdit.close();
   }

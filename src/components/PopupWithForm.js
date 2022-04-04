@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._submitForm = submitForm;
     this._popupForm = this._popupElement.querySelector('.form');
     this._inputLists = this._popupElement.querySelectorAll('.form__input');
+    this._submitButton = this._popupElement.querySelector('.form__submit');
   }
 
   _getInputValues() {
@@ -19,6 +20,7 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this.renderLoading(true);
       this._submitForm(this._getInputValues());
     });
     super.setEventListeners();
@@ -31,5 +33,13 @@ export default class PopupWithForm extends Popup {
 
   confirmDeleteCard(newSubmitForm) {
     this._submitForm = newSubmitForm;
+  }
+
+  renderLoading(isLoading) {
+    if(isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = 'Сохранить';
+    }
   }
 }
