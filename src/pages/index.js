@@ -88,17 +88,41 @@ const handleRemoveCard = (cardId, event) => {
   })
 }
 
-const handleLikeClick = (id, likesCounter, userId, button) => {
-  api.addLike(id)
-    .then(res => {
-      if(res.likes.find(item => item._id === userId)) {
-        likesCounter.innerText = res.likes.length; // Добавление лайков
+const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
+  //likes.forEach(like => {
+    //console.log(like._id)
+    //if(like._id !== userId) {
+     // likes.forEach(item => console.log(item._id + ' ' + userId))
+  if(likes.find(item => item._id === userId)) {
+    api.removeLike(cardId)
+      .then((res) => {
+        button.target.classList.remove('element__like-button_active');
+        likeCounter.innerText = res.likes.length;
+       console.log('remove')
+    })
+  } else {
+    api.addLike(cardId)
+      .then((res) => {
         button.target.classList.add('element__like-button_active');
-      }
+        likeCounter.innerText = res.likes.length;
+        console.log('add')
+    })
+  }
+}
+    //} else {
+      //button.target.classList.remove('element__like-button_active');
+      //console.log('+ Мой лайк ' + res)
+   // }
+  //});
+  //api.addLike(id)
+    //.then(res => {
+      //if(res.likes.find(item => item._id === userId)) {
+        //likesCounter.innerText = res.likes.length; // Добавление лайков
+        //button.target.classList.add('element__like-button_active');
+      //}
       //res.likes.forEach(item => (console.log(item._id + ' ' + userId)))
 
-    })
-}
+   // })
 
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
