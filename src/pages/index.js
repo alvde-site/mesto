@@ -36,13 +36,13 @@ const cardsList = new Section({
 let userId;
 
 Promise.all([api.getUserInfo(),api.getInitialCards()])
-  .then(([userData, cards]) => {
+  .then(([userData, cards]) => { // cards = массив объектов карточке с сервера
     userId = userData._id;
     const remoteFormValues = setUserInfo(userData);
     userInfo.setUserInfo(remoteFormValues);
     userInfo.setUserAvatar('.profile__avatar', userData.avatar);
 
-    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section, cards = массив объектов карточке с сервера
+    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section
   })
 
 const setUserInfo = (result)=> {
@@ -91,10 +91,6 @@ const handleRemoveCard = (cardId, event) => {
 }
 
 const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
-  //likes.forEach(like => {
-    //console.log(like._id)
-    //if(like._id !== userId) {
-     // likes.forEach(item => console.log(item._id + ' ' + userId))
   if(likes.find(item => item._id === userId)) {
     api.removeLike(cardId)
       .then((res) => {
@@ -109,20 +105,6 @@ const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
     })
   }
 }
-    //} else {
-      //button.target.classList.remove('element__like-button_active');
-      //console.log('+ Мой лайк ' + res)
-   // }
-  //});
-  //api.addLike(id)
-    //.then(res => {
-      //if(res.likes.find(item => item._id === userId)) {
-        //likesCounter.innerText = res.likes.length; // Добавление лайков
-        //button.target.classList.add('element__like-button_active');
-      //}
-      //res.likes.forEach(item => (console.log(item._id + ' ' + userId)))
-
-   // })
 
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
@@ -146,7 +128,7 @@ const avatarPopup = new PopupWithForm({
 avatarPopup.setEventListeners();
 
 const createCard = (cardItem, handleCardClick)=> {
-  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId); // В cardItem ожидается {..., owner._id}
+  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId);
   return card.generateCard();
 }
 
@@ -202,9 +184,6 @@ function openPopupEditForm () {
 function openPopupEditAvatar () {
   //Деативация кнопки сабмита
   formValidator['avatarform'].resetValidation();
-  //const userData = userInfo.getUserInfo();
-  //nameInput.value = userData['profile__name'];
-  //jobInput.value = userData['profile__job'];
   avatarPopup.open();
 }
 

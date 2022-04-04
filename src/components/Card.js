@@ -51,7 +51,6 @@ export default class Card {
   _addLikeToButton() {
     this._likeButton.addEventListener('click', (button) => {
       this._handleLikeClick(this._cardId, this._likes, button, this._userId, this._likeCounter);
-     // button.target.classList.toggle('element__like-button_active');
     });
   }
 
