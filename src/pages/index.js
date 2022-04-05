@@ -118,11 +118,13 @@ const avatarPopup = new PopupWithForm({
   popupSelector: '.popup_handle_edit-avatar',
   submitForm: (formValues) => {
     api.editAvatarInfo(formValues)
+      .then((res) => {
+        userInfo.setUserAvatar('.profile__avatar', res.avatar);
+        avatarPopup.close();
+       })
       .finally(()=>{
         avatarPopup.renderLoading(false);
       });
-    userInfo.setUserAvatar('.profile__avatar', formValues.link);
-    avatarPopup.close();
   }
 });
 avatarPopup.setEventListeners();
@@ -164,11 +166,17 @@ const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
     api.editUserInfo(formValues)
+      .then((res) => {
+        const userData = {
+          profilename: res.name,
+          profilejob: res.about
+        }
+        userInfo.setUserInfo(userData);
+        formEdit.close();
+      })
       .finally(()=>{
         formEdit.renderLoading(false);
       });
-    userInfo.setUserInfo(formValues);
-    formEdit.close();
   }
 });
 

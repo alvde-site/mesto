@@ -66,7 +66,10 @@ export default class Api {
     })
     .then((res) =>
       res.ok ? res.json() : Promise.reject(`${res.status}`)
-      )
+    )
+    .catch((err) => {
+      console.log(`${err}`);
+    })
   }
 
   deleteCard(cardId) {
