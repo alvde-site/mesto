@@ -63,7 +63,10 @@ export default class Api {
         name: name,
         link: link
       })
-    });
+    })
+    .then((res) =>
+      res.ok ? res.json() : Promise.reject(`${res.status}`)
+      )
   }
 
   deleteCard(cardId) {

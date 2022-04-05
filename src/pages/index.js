@@ -103,7 +103,7 @@ const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
         button.target.classList.add('element__like-button_active');
         likeCounter.innerText = res.likes.length;
     })
-  }
+ }
 }
 
 // Попап просмотра изображения
@@ -138,14 +138,16 @@ const formAdd = new PopupWithForm({
   popupSelector: '.popup_handle_add-element',
   submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
     api.addCard(formValues)
+      .then((res) => {
+        formValues.likes = res.likes;
+        formValues.owner = {};
+        formValues.owner._id = userId;
+        cardsList.addItem(createCard(formValues));  // Вставка готового элемента на страницу
+        formAdd.close();
+    })
     .finally(()=>{
       formAdd.renderLoading(false);
     });
-    formValues['likes'] = [];
-    formValues.owner = {};
-    formValues.owner._id = userId;
-    cardsList.addItem(createCard(formValues));  // Вставка готового элемента на страницу
-    formAdd.close();
   }
 })
 
