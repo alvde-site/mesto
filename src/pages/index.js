@@ -141,10 +141,7 @@ const formAdd = new PopupWithForm({
   submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
     api.addCard(formValues)
       .then((res) => {
-        formValues.likes = res.likes;
-        formValues.owner = {};
-        formValues.owner._id = userId;
-        cardsList.addItem(createCard(formValues));  // Вставка готового элемента на страницу
+        cardsList.addItem(createCard(res));  // Вставка готового элемента на страницу
         formAdd.close();
     })
     .finally(()=>{
