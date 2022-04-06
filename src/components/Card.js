@@ -84,7 +84,6 @@ export default class Card {
 
   isLiked() {
     const isLikedCard = this._likes.find(item => item._id === this._userId);
-    //this._likes.forEach(item => {console.log(this._userId)})
     return isLikedCard;
   }
 }

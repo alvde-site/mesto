@@ -90,22 +90,6 @@ const handleRemoveCard = (cardId, event) => {
   })
 }
 
-/*const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
-  if(likes.find(item => item._id === userId)) {
-    api.removeLike(cardId)
-      .then((res) => {
-        button.target.classList.remove('element__like-button_active');
-        likeCounter.innerText = res.likes.length;
-    })
-  } else {
-    api.addLike(cardId)
-      .then((res) => {
-        button.target.classList.add('element__like-button_active');
-        likeCounter.innerText = res.likes.length;
-    })
- }
-}*/
-
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
 const handleCardClick = (name, link) => {
@@ -141,15 +125,11 @@ const createCard = (cardItem, userId)=> {
         api.removeLike(id)
           .then((res) => {
             card.setNewLikes(res.likes)
-          //button.target.classList.remove('element__like-button_active');
-          //likeCounter.innerText = res.likes.length;
       })
       } else {
         api.addLike(id)
           .then((res) => {
             card.setNewLikes(res.likes)
-          //button.target.classList.add('element__like-button_active');
-          //likeCounter.innerText = res.likes.length;
         })
       }
     }},
