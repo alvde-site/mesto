@@ -164,7 +164,7 @@ const formAdd = new PopupWithForm({
   submitForm: (formValues) => {  //formValues =  Значение полей формы добавления карточки
     api.addCard(formValues)
       .then((res) => {
-        cardsList.addItem(createCard(res));  // Вставка готового элемента на страницу
+        cardsList.addItem(createCard(res, userId));  // Вставка готового элемента на страницу
         formAdd.close();
     })
     .finally(()=>{
