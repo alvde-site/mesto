@@ -26,8 +26,8 @@ const api = new Api({
 
 // Отрисовка карточек на странице
 const cardsList = new Section({
-  renderer: (cardItem) => {  // cardItem = объект карточки с сервера
-    cardsList.addItem(createCard(cardItem));
+  renderer: (cardItem, userId) => {  // cardItem = объект карточки с сервера
+    cardsList.addItem(createCard(cardItem, userId));
   }
 }, '.elements__container');
 
@@ -42,7 +42,7 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
     userInfo.setUserInfo(remoteFormValues);
     userInfo.setUserAvatar('.profile__avatar', userData.avatar);
 
-    cardsList.rendererItems(cards); // Вызов функции renderer из класса Section
+    cardsList.rendererItems(cards, userId); // Вызов функции renderer из класса Section
   })
 
 const setUserInfo = (result)=> {
@@ -90,7 +90,7 @@ const handleRemoveCard = (cardId, event) => {
   })
 }
 
-const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
+/*const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
   if(likes.find(item => item._id === userId)) {
     api.removeLike(cardId)
       .then((res) => {
@@ -104,7 +104,7 @@ const handleLikeClick = (cardId, likes, button, userId, likeCounter) => {
         likeCounter.innerText = res.likes.length;
     })
  }
-}
+}*/
 
 // Попап просмотра изображения
 const imagePopup = new PopupWithImage('.popup_handle_image-viewing');
@@ -129,8 +129,31 @@ const avatarPopup = new PopupWithForm({
 });
 avatarPopup.setEventListeners();
 
-const createCard = (cardItem)=> {
-  const card = new Card(cardItem, '#element_template', handleCardClick, handleRemoveCard, handleLikeClick, userId);
+const createCard = (cardItem, userId)=> {
+  const card = new Card(
+    cardItem,
+    '#element_template',
+    handleCardClick,
+    handleRemoveCard,
+    {handleLikeClick: (id) => {
+      //console.log(card.isLiked())
+      if(card.isLiked()){
+        api.removeLike(id)
+          .then((res) => {
+            card.setNewLikes(res.likes)
+          //button.target.classList.remove('element__like-button_active');
+          //likeCounter.innerText = res.likes.length;
+      })
+      } else {
+        api.addLike(id)
+          .then((res) => {
+            card.setNewLikes(res.likes)
+          //button.target.classList.add('element__like-button_active');
+          //likeCounter.innerText = res.likes.length;
+        })
+      }
+    }},
+    userId);
   return card.generateCard();
 }
 

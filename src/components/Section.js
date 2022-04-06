@@ -5,9 +5,9 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  rendererItems(items) {
+  rendererItems(items, userId) {
     items.reverse().forEach(item => {
-      this._renderer(item);
+      this._renderer(item, userId);
     });
   }
 

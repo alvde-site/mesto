@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick, handleRemoveCard, handleLikeClick, userId) {
+  constructor(data, cardSelector, handleCardClick, handleRemoveCard, {handleLikeClick}, userId) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -49,8 +49,8 @@ export default class Card {
   }
 
   _addLikeToButton() {
-    this._likeButton.addEventListener('click', (button) => {
-      this._handleLikeClick(this._cardId, this._likes, button, this._userId, this._likeCounter);
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeClick(this._cardId);
     });
   }
 
@@ -70,7 +70,21 @@ export default class Card {
     this._likes.forEach(like => {
       if(like._id === this._userId) {
         this._likeButton.classList.add('element__like-button_active');
+      } else {
+        this._likeButton.classList.remove('element__like-button_active');
       }
     });
+  }
+
+  setNewLikes(newLikes) {
+    this._likes = newLikes;
+    this._likeCounter.innerText = this._likes.length;
+    this._setLikes();
+  }
+
+  isLiked() {
+    const isLikedCard = this._likes.find(item => item._id === this._userId);
+    //this._likes.forEach(item => {console.log(this._userId)})
+    return isLikedCard;
   }
 }
