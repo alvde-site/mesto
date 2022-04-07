@@ -16,23 +16,22 @@ export default class Api {
   }
 
   getInitialCards() {
-    return customFetch(
-      `${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
         headers: {
           authorization: this._authorization
         }
       }
-    )
+    ).then(this._checkResponse)
   }
 
   getUserInfo() {
-      return customFetch(
-        `${this._baseUrl}/users/me`, {
-          headers: {
-            authorization: this._authorization
-          }
+    return fetch(
+      `${this._baseUrl}/users/me`, {
+        headers: {
+          authorization: this._authorization
         }
-      )
+      }
+    ).then(this._checkResponse)
   }
 
   editUserInfo({profilename, profilejob}) {
@@ -43,10 +42,7 @@ export default class Api {
         name: profilename,
         about: profilejob
       })
-    })
-    .then((res) =>
-        res.ok ? res.json() : Promise.reject(`${res.status}`)
-      )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     });
@@ -63,10 +59,7 @@ export default class Api {
         name: name,
         link: link
       })
-    })
-    .then((res) =>
-      res.ok ? res.json() : Promise.reject(`${res.status}`)
-    )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     })
@@ -78,9 +71,7 @@ export default class Api {
       headers: {
         authorization: this._authorization
       }
-    }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`${res.status}`)
-    )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     });
@@ -92,9 +83,7 @@ export default class Api {
       headers: {
         authorization: this._authorization
       }
-    }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`${res.status}`)
-    )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     });
@@ -106,9 +95,7 @@ export default class Api {
       headers: {
         authorization: this._authorization
       }
-    }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`${res.status}`)
-    )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     });
@@ -121,12 +108,13 @@ export default class Api {
       body: JSON.stringify({
         avatar: link
       })
-    })
-    .then((res) =>
-        res.ok ? res.json() : Promise.reject(`${res.status}`)
-      )
+    }).then(this._checkResponse)
     .catch((err) => {
       console.log(`${err}`);
     });
+  }
+
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
   }
 }
