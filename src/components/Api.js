@@ -1,13 +1,3 @@
-const customFetch = (url, options = {})=> {
-  return fetch(url, options)
-  .then((res) =>
-  res.ok ? res.json() : Promise.reject(`${res.status}`)
-)
-  .catch((err) => {
-    console.log(`${err}`);
-  })
-}
-
 export default class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
@@ -43,9 +33,6 @@ export default class Api {
         about: profilejob
       })
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    });
   }
 
   addCard({name, link}) {
@@ -60,9 +47,6 @@ export default class Api {
         link: link
       })
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    })
   }
 
   deleteCard(cardId) {
@@ -72,9 +56,6 @@ export default class Api {
         authorization: this._authorization
       }
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    });
   }
 
   addLike(cardId) {
@@ -84,9 +65,6 @@ export default class Api {
         authorization: this._authorization
       }
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    });
   }
 
   removeLike(cardId) {
@@ -96,9 +74,6 @@ export default class Api {
         authorization: this._authorization
       }
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    });
   }
 
   editAvatarInfo({link}) {
@@ -109,9 +84,6 @@ export default class Api {
         avatar: link
       })
     }).then(this._checkResponse)
-    .catch((err) => {
-      console.log(`${err}`);
-    });
   }
 
   _checkResponse(res) {
