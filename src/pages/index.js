@@ -38,23 +38,13 @@ let userId;
 Promise.all([api.getUserInfo(),api.getInitialCards()])
   .then(([userData, cards]) => { // cards = массив объектов карточке с сервера
     userId = userData._id;
-    const remoteFormValues = setUserInfo(userData);
-    userInfo.setUserInfo(remoteFormValues);
-    userInfo.setUserAvatar(userData.avatar);
+    userInfo.setUserInfo(userData);
 
     cardsList.rendererItems(cards, userId); // Вызов функции renderer из класса Section
   })
   .catch((err) => {
     console.log(`${err}`);
   });
-
-const setUserInfo = (result)=> {
-  const remoteFormValues = {
-    profilename: result.name,
-    profilejob: result.about
-  }
-  return remoteFormValues;
-}
 
 // Управление отображением информации профиля пользователя
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar');
@@ -108,8 +98,8 @@ const avatarPopup = new PopupWithForm({
   popupSelector: '.popup_handle_edit-avatar',
   submitForm: (formValues) => {
     api.editAvatarInfo(formValues)
-      .then((res) => {
-        userInfo.setUserAvatar(res.avatar);
+      .then((userData) => {
+        userInfo.setUserInfo(userData);
         avatarPopup.close();
        })
        .catch((err) => {
@@ -129,7 +119,6 @@ const createCard = (cardItem, userId)=> {
     handleCardClick,
     handleRemoveCard,
     {handleLikeClick: (id) => {
-      //console.log(card.isLiked())
       if(card.isLiked()){
         api.removeLike(id)
           .then((res) => {
@@ -184,11 +173,7 @@ const formEdit = new PopupWithForm({
   popupSelector: '.popup_handle_profile',
   submitForm: (formValues) => {
     api.editUserInfo(formValues)
-      .then((res) => {
-        const userData = {
-          profilename: res.name,
-          profilejob: res.about
-        }
+      .then((userData) => {
         userInfo.setUserInfo(userData);
         formEdit.close();
       })
