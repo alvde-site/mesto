@@ -44,6 +44,9 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
 
     cardsList.rendererItems(cards, userId); // Вызов функции renderer из класса Section
   })
+  .catch((err) => {
+    console.log(`${err}`);
+  });
 
 const setUserInfo = (result)=> {
   const remoteFormValues = {
@@ -86,6 +89,9 @@ const handleRemoveCard = (cardId, event) => {
     api.deleteCard(cardId).then(() => {
       event.target.closest('.element').remove()
       confirmPopup.close();
+    })
+    .catch((err) => {
+      console.log(`${err}`);
     });
   })
 }
@@ -106,6 +112,9 @@ const avatarPopup = new PopupWithForm({
         userInfo.setUserAvatar('.profile__avatar', res.avatar);
         avatarPopup.close();
        })
+       .catch((err) => {
+        console.log(`${err}`);
+      })
       .finally(()=>{
         avatarPopup.renderLoading(false);
       });
@@ -126,11 +135,17 @@ const createCard = (cardItem, userId)=> {
           .then((res) => {
             card.setNewLikes(res.likes)
       })
+      .catch((err) => {
+        console.log(`${err}`);
+      })
       } else {
         api.addLike(id)
           .then((res) => {
             card.setNewLikes(res.likes)
         })
+        .catch((err) => {
+          console.log(`${err}`);
+        });
       }
     }},
     userId);
@@ -146,6 +161,9 @@ const formAdd = new PopupWithForm({
       .then((res) => {
         cardsList.addItem(createCard(res, userId));  // Вставка готового элемента на страницу
         formAdd.close();
+    })
+    .catch((err) => {
+      console.log(`${err}`);
     })
     .finally(()=>{
       formAdd.renderLoading(false);
@@ -173,6 +191,9 @@ const formEdit = new PopupWithForm({
         }
         userInfo.setUserInfo(userData);
         formEdit.close();
+      })
+      .catch((err) => {
+        console.log(`${err}`);
       })
       .finally(()=>{
         formEdit.renderLoading(false);
