@@ -40,7 +40,7 @@ Promise.all([api.getUserInfo(),api.getInitialCards()])
     userId = userData._id;
     const remoteFormValues = setUserInfo(userData);
     userInfo.setUserInfo(remoteFormValues);
-    userInfo.setUserAvatar('.profile__avatar', userData.avatar);
+    userInfo.setUserAvatar(userData.avatar);
 
     cardsList.rendererItems(cards, userId); // Вызов функции renderer из класса Section
   })
@@ -57,7 +57,7 @@ const setUserInfo = (result)=> {
 }
 
 // Управление отображением информации профиля пользователя
-const userInfo = new UserInfo('.profile__name', '.profile__job');
+const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar');
 
 // Объект с набором форм и аттрибутом name;
 const formValidator = {};
@@ -109,7 +109,7 @@ const avatarPopup = new PopupWithForm({
   submitForm: (formValues) => {
     api.editAvatarInfo(formValues)
       .then((res) => {
-        userInfo.setUserAvatar('.profile__avatar', res.avatar);
+        userInfo.setUserAvatar(res.avatar);
         avatarPopup.close();
        })
        .catch((err) => {
