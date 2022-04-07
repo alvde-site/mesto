@@ -67,13 +67,11 @@ export default class Card {
   }
 
   _setLikes() {
-    this._likes.forEach(like => {
-      if(like._id === this._userId) {
+      if(this.isLiked()) {
         this._likeButton.classList.add('element__like-button_active');
       } else {
         this._likeButton.classList.remove('element__like-button_active');
       }
-    });
   }
 
   setNewLikes(newLikes) {
